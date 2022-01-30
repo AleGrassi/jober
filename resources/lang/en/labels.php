@@ -1,0 +1,30 @@
+<?php
+
+return [
+
+    'welcome' => 'Welcome',
+    'logout' => 'logout',
+    'login' => 'Log in',
+    'register' => 'Register',
+    'remember' => 'Remember me',
+    'forgotPassword' => 'Forgot Password?',
+    'email' => 'Email Address',
+    'confirmPassword' => 'Confirm Password',
+    'registerNow' => 'Register Now',
+    'authError' => 'Authentication Error',
+    'wrongCredentialsMessage' => 'Wrong credentials while accessing this page',
+    'backHome' => 'Back to home',
+    'edit' => 'Edit',
+    'delete' => 'Delete',
+    'firstName' => 'First Name',
+    'lastName' => 'Last Name',
+    'create' => 'Create',
+    'save' => 'Save',
+    'cancel' => 'Cancel',
+    'revert' => 'Revert',
+    'confirm' => 'Confirm',
+    'illegalPageAccessTitle' => 'Illegal page access',
+    'illegalPageAccessMsgFirstPart' => 'Something',
+    'illegalPageAccessMsgStrongPart' => 'wrong',
+    'illegalPageAccessMsgLastPart' => 'happened while accessing this page',
+];
