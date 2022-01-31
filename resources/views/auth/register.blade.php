@@ -14,6 +14,19 @@
                         @csrf
 
                         <div class="row mb-3">
+                            <div class="col-md-5 text-md-end">
+                                <input id="worker" name="user_type" type="radio" class="form-check-input" name="user_type" value="worker" required autofocus>
+                                <label for="worker" class="form-check-label">Professional</label>
+                            </div>    
+                            <div class="col-md-2">
+                            </div>    
+                            <div class="col-md-5">
+                                <input id="company" name="user_type" type="radio" class="form-check-input" name="user_type" value="company" required autofocus>
+                                <label for="company" class="form-check-label">Company</label>
+                            </div>    
+                        </div>    
+                        
+                        <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
