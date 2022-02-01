@@ -42,6 +42,10 @@ class DataLayer{
         return Offer::find($id);
     }
 
+    public function find_user_by_id($id){
+        return User::find($id);
+    }
+
     //delete elements
     public function delete_worker($worker_id){
         Worker::find($worker_id)->delete();

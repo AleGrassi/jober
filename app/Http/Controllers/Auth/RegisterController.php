@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Models\DataLayer;
 
 class RegisterController extends Controller
 {
@@ -64,11 +65,25 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $user_type = $data['user_type'];
         return User::create([
             'user_type' => $data['user_type'],
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    public function redirectTo()
+    {
+        $dl = new DataLayer();
+        $user_id = auth()->id();
+        $user_type = $dl->find_user_by_id($user_id)->user_type;
+
+        if($user_type == 'worker'){
+            return $this->redirectTo = route('worker.create');
+        }else{
+            return $this->redirectTo = route('company.create');
+        }
     }
 }

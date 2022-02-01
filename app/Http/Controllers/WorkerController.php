@@ -17,7 +17,7 @@ class WorkerController extends Controller
     }
 
     public function create(){
-
+        return view('worker.edit_worker_profile');
     }
 
     public function store(){

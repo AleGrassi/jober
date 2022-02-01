@@ -17,7 +17,7 @@ class CompanyController extends Controller
     }
 
     public function create(){
-
+        return view('company.edit_company_profile');
     }
 
     public function store(){
