@@ -21,7 +21,7 @@
             <div class="card">
                 <div class="my-auto">
                     <div class="basic-info-image-holder">
-                        <img class="card-img-top" src="{{ url('/') }}/img/profile_img/1.jpeg">
+                        <img class="card-img-top" src="{{ url('/') }}/img/worker_profile/worker_profile_tmp.png">
                     </div>
                 </div>
             </div>
@@ -95,13 +95,13 @@
                             </div>
                             <ul class="list-group list-group-flush">
                                 <div id="education_fields">
-                                    <li class="list-group-item" id="education_field_0">
+                                    <li class="list-group-item" id="education_field">
                                             <div class="row my-auto">
                                                 <div class="col-12 col-sm-8 col-md-9 my-auto">
                                                     <input class="form-control" type="text" id="education" name="education[]" placeholder="School or university..." value="">
                                                 </div> 
                                                 <div class="col-12 col-sm-4 col-md-3 my-auto">
-                                                    <a class="btn btn-delete-field" onclick="removeField('education_field_',0)">
+                                                    <a class="btn btn-delete-field">
                                                         <i class="bi bi-trash-fill"></i> 
                                                     </a>
                                                 </div>
@@ -219,30 +219,37 @@
 
 
 
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script type='text/javascript'>
 
-    function removeField(id, num){
-        document.getElementById(id+""+num).remove();
+    $(document).ready(function() {
+        $('.btn-delete-field').on('click', function (e) {
+            $(this).closest("li").remove();        
+        });   
+    });
+
+    function addDeleteFieldEffect(){
+        $(document).ready(function() {
+            $('.btn-delete-field').on('click', function (e) {
+                $(this).closest("li").remove();        
+            });   
+        });
     }
+    
 
     function addEducationField(){
         var container = document.getElementById("education_fields");
         var children = container.children;
-        alert(children.length);
         
-        for(let i=0; i < children.length; i++){
-            alert(children[i].id)
-        }
-
         child_index = children.length;
 
-        var child = `<li class="list-group-item" id="education_field_`+(child_index)+`">
+        var child = `<li class="list-group-item" id="education_field">
                                         <div class="row my-auto">
                                             <div class="col-12 col-sm-8 col-md-9 my-auto">
                                                 <input class="form-control" type="text" id="education" name="education[]" placeholder="School or university..." value="">
                                             </div> 
                                             <div class="col-12 col-sm-4 col-md-3 my-auto">
-                                                <a class="btn btn-delete-field my-auto" onclick="removeField('education_field_',`+child_index+`)">
+                                                <a class="btn btn-delete-field my-auto">
                                                     <i class="bi bi-trash-fill"></i> 
                                                 </a>
                                             </div>
@@ -250,6 +257,7 @@
                                 </li>`;
 
         container.innerHTML += child; 
+        addDeleteFieldEffect();
     }
 
     function addFormerJobField(){
