@@ -11,7 +11,7 @@ class Company extends Model
 
     protected $table = 'company';
     public $timestamps = false;
-    protected $fillable = ['name','description','image','email'];
+    protected $fillable = ['name','description','image','email','user_id'];
 
     public function locations(){
         return $this->hasMany('App\Models\CompanyLocation');
@@ -19,5 +19,9 @@ class Company extends Model
 
     public function offers(){
         return $this->hasMany('App\Models\Offer');
+    }
+    
+    public function user(){
+        return $this->belongsTo('App\Models\User');
     }
 }

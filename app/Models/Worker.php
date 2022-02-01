@@ -11,7 +11,7 @@ class Worker extends Model
 
     protected $table = 'worker';
     public $timestamps = false;
-    protected $fillable = ['name','surname','image','sex','date_of_birth','email','main_profession','nationality'];
+    protected $fillable = ['name','surname','image','sex','date_of_birth','email','main_profession','nationality','user_id'];
 
     public function offers(){
         return $this->belongsToMany('App\Models\Offer');
@@ -31,5 +31,9 @@ class Worker extends Model
 
     public function former_jobs(){
         return $this->hasMany('App\Models\FormerJob');
+    }
+
+    public function user(){
+        return $this->belongsTo('App\Models\User');
     }
 }

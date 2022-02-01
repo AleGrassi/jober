@@ -78,7 +78,8 @@ class RegisterController extends Controller
     {
         $dl = new DataLayer();
         $user_id = auth()->id();
-        $user_type = $dl->find_user_by_id($user_id)->user_type;
+        $user = $dl->find_user_by_id($user_id);
+        $user_type = $user->user_type;
 
         if($user_type == 'worker'){
             return $this->redirectTo = route('worker.create');
