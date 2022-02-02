@@ -30,7 +30,26 @@ class WorkerController extends Controller
 
         $user_id = auth()->id();
         $user_email = $dl->find_user_by_id($user_id)->email;
-        $worker = $dl->add_worker($request->input('name'), $request->input('surname'), $request->input('image'), $request->input('date_of_birth'), $user_email, $request->input('main_profession'), $request->input('nationality'), $user_id);
+
+        $dl->console_log($request->input());
+
+        if($request->hasFile("profile_image")){
+            $dl->console_log("ho un'immagine");
+            $filenameWithExt = $request->file('profile_image')->getClientOriginalName();
+            //Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('profile_image')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $request->file('profile_image')->storeAs('public/img/worker_profile/',$fileNameToStore);
+        }else{
+            $dl->console_log("non ho un'immagine");
+        }
+
+
+        $worker = $dl->add_worker($request->input('name'), $request->input('surname'), $fileNameToStore, $request->input('date_of_birth'), $user_email, $request->input('main_profession'), $request->input('nationality'), $user_id);
         $dl->console_log($worker);
         $worker_id = $worker->id;
 

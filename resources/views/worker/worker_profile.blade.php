@@ -21,7 +21,7 @@
             <div class="card basic-info-card">
                 <div class="my-auto">
                     <div class="basic-info-image-holder">
-                        <img class="card-img-top" src="{{ url('/') }}/img/worker_profile/{{ $worker->image }}">
+                        <img class="card-img-top" src="public/img/worker_profile/{{ $worker->image }}">
                     </div>
                 </div>
             </div>

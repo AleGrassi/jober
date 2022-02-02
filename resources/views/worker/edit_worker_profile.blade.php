@@ -15,9 +15,9 @@
 
 @section('corpo')
 @if(isset($worker->id))
-    <form name="worker" method="post" action="{{ route('worker.update', ['id' => $worker->id]) }}">
+    <form name="worker" method="post" action="{{ route('worker.update', ['id' => $worker->id]) }}" enctype="multipart/form-data">
 @else
-    <form name="worker" method="post" action="{{ route('worker.store') }}">
+    <form name="worker" method="post" action="{{ route('worker.store') }}" enctype="multipart/form-data"> 
 @endif
 @csrf
         <div class="container">
@@ -25,10 +25,13 @@
                 
 
                 <div class="col-12 col-sm-3">
-                    <div class="card">
+                    <div class="card profile_image_card">
                         <div class="my-auto">
                             <div class="basic-info-image-holder">
-                                <img class="card-img-top" src="{{ url('/') }}/img/worker_profile/worker_profile_tmp.png">
+                                <label for="profile_image">
+                                    <img id="image" class="card-img-top" src="public/img/worker_profile/worker_profile_tmp.png">
+                                    <input type="file" name="profile_image" id="profile_image" style="display:none;" accept="image/*" onchange="showImage(this)"/>
+                                </label>
                             </div>
                         </div>
                     </div>
