@@ -5,12 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\DataLayer;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 
 class WorkerController extends Controller
 {
     public function index(){
-        session_start();
-
         $dl = new DataLayer();
         $workers = $dl->list_workers();
 
@@ -18,12 +17,7 @@ class WorkerController extends Controller
     }
 
     public function create(){
-        $dl = new DataLayer();
-
-        $user = $dl->find_user_by_id(auth()->id());
-        $user_name = $user->name;
-
-        return view('worker.edit_worker_profile')->with('user_name', $user_name);
+        return view('worker.edit_worker_profile');
     }
 
     public function store(Request $request){
@@ -94,16 +88,18 @@ class WorkerController extends Controller
     } 
 
     public function show($id){
-        session_start();
-        
         $dl = new DataLayer();
         $worker = $dl -> find_worker_by_id($id);
 
         return view('worker.worker_profile')->with('worker', $worker);
     } 
     
-    public function edit(){
-
+    public function edit($id){
+        if($id == Auth::user()->worker->id){
+            return view('worker.edit_worker_profile')->with('worker', Auth::user()->worker);
+        }else{
+            return Redirect::to(route('worker.show', ['worker' => $id]));
+        }
     } 
 
     public function update(){

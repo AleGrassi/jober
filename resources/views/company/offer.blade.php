@@ -61,7 +61,7 @@
     </div>
 </div>
 
-<div class="container top-buffer">
+<div class="container top-buffer mb-4">
         <div class="row row-cols-1 g-3">
             <div class="col">
                 <div class="card">

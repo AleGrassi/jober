@@ -23,7 +23,6 @@
         <div class="container">
             <div class="row g-4 table-like">
                 
-
                 <div class="col-12 col-sm-3">
                     <div class="card profile_image_card">
                         <div class="my-auto">
@@ -37,7 +36,6 @@
                     </div>
                 </div>
 
-
                 <div class="col-12 col-sm-7">
                     <div class="card">
                         <div class="card-body">
@@ -45,35 +43,51 @@
                                 <div class="row mb-2">
                                     <label for="name" class="col-md-4 col-form-label text-md-end">Name:</label>
                                     <div class="col-md-6">
-                                        <input id="name" type="text" class="form-control" name="name" value="{{ $user_name }}" required autofocus>
+                                        <input id="name" type="text" class="form-control" name="name" value="{{ Auth::user()->name }}" required autofocus>
                                     </div>
                                 </div>
 
                                 <div class="row mb-2">
                                     <label for="surname" class="col-md-4 col-form-label text-md-end">Surname:</label>
                                     <div class="col-md-6">
-                                        <input id="surname" type="text" class="form-control" name="surname" value="" required autofocus>
+                                        @if(isset($worker))
+                                            <input id="surname" type="text" class="form-control" name="surname" value="{{ $worker->surname }}" required autofocus>
+                                        @else
+                                            <input id="surname" type="text" class="form-control" name="surname" value="" required autofocus>
+                                        @endif
                                     </div>
                                 </div>
 
                                 <div class="row mb-2">
                                     <label for="age" class="col-md-4 col-form-label text-md-end">age:</label>
                                     <div class="col-md-6">
-                                        <input id="age" type="date" class="form-control" name="date_of_birth" value="" required autofocus>
+                                        @if(isset($worker))
+                                            <input id="age" type="date" class="form-control" name="date_of_birth" value="{{ $worker->date_of_birth }}" required autofocus>
+                                        @else
+                                            <input id="age" type="date" class="form-control" name="date_of_birth" value="" required autofocus>
+                                        @endif
                                     </div>
                                 </div>
 
                                 <div class="row mb-2">
                                     <label for="nationality" class="col-md-4 col-form-label text-md-end">nationality:</label>
                                     <div class="col-md-6">
-                                        <input id="nationality" type="text" class="form-control" name="nationality" value="" required autofocus>
+                                        @if(isset($worker))
+                                            <input id="nationality" type="text" class="form-control" name="nationality" value="{{ $worker->nationality }}" required autofocus>
+                                        @else
+                                            <input id="nationality" type="text" class="form-control" name="nationality" value="" required autofocus>
+                                        @endif
                                     </div>
                                 </div>
 
                                 <div class="row mb-2">
                                     <label for="main_profession" class="col-md-4 col-form-label text-md-end">Main Profession:</label>
                                     <div class="col-md-6">
-                                        <input id="main_profession" type="text" class="form-control" name="main_profession" value="" required autofocus>
+                                        @if(isset($worker))
+                                            <input id="main_profession" type="text" class="form-control" name="main_profession" value="{{ $worker->main_profession }}" required autofocus>
+                                        @else
+                                            <input id="main_profession" type="text" class="form-control" name="main_profession" value="" required autofocus>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -106,18 +120,35 @@
                                     </div>
                                     <ul class="list-group list-group-flush">
                                         <div id="education_fields">
-                                            <li class="list-group-item" id="education_field">
-                                                    <div class="row my-auto">
-                                                        <div class="col-12 col-sm-8 col-md-9 my-auto">
-                                                            <input class="form-control" type="text" id="education" name="education[]" placeholder="School or university..." value="">
-                                                        </div> 
-                                                        <div class="col-12 col-sm-4 col-md-3 my-auto">
-                                                            <a class="btn btn-delete-field" onclick="addDeleteFieldEffect(this)">
-                                                                <i class="bi bi-trash-fill"></i> 
-                                                            </a>
+                                            @if(isset($worker))
+                                                @foreach($worker->educations as $education)
+                                                    <li class="list-group-item" id="education_field">
+                                                            <div class="row my-auto">
+                                                                <div class="col-12 col-sm-8 col-md-9 my-auto">
+                                                                    <input class="form-control" type="text" id="education" name="education[]" placeholder="School or university..." value="{{ $education }}">
+                                                                </div> 
+                                                                <div class="col-12 col-sm-4 col-md-3 my-auto">
+                                                                    <a class="btn btn-delete-field" onclick="addDeleteFieldEffect(this)">
+                                                                        <i class="bi bi-trash-fill"></i> 
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                    </li>
+                                                @endforeach
+                                            @else
+                                                <li class="list-group-item" id="education_field">
+                                                        <div class="row my-auto">
+                                                            <div class="col-12 col-sm-8 col-md-9 my-auto">
+                                                                <input class="form-control" type="text" id="education" name="education[]" placeholder="School or university..." value="">
+                                                            </div> 
+                                                            <div class="col-12 col-sm-4 col-md-3 my-auto">
+                                                                <a class="btn btn-delete-field" onclick="addDeleteFieldEffect(this)">
+                                                                    <i class="bi bi-trash-fill"></i> 
+                                                                </a>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                            </li>
+                                                </li>
+                                            @endif
                                         </div>
                                         <li class="list-group-item center-text">
                                             <a class="btn btn-add" onclick="addEducationField()">
@@ -134,19 +165,37 @@
                                         <h5 class="card-title">Former jobs</h5>
                                     </div>
                                     <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">
-                                                <div class="row my-auto">
-                                                    <div class="col-12 col-sm-8 col-md-9 my-auto">
-                                                        <input class="form-control" type="text" id="former_job" name="former_job[]" placeholder="Former Job..." value="">
-                                                    </div> 
-                                                    <div class="col-12 col-sm-4 col-md-3 my-auto">
-                                                        <a class="btn btn-delete-field" onclick="addDeleteFieldEffect(this)">
-                                                            <i class="bi bi-trash-fill"></i> 
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                        </li>
-                                        <div id="former_job_fields"></div>
+                                        <div id="former_job_fields">
+                                            @if(isset($worker))
+                                                @foreach($worker->former_jobs as $fj)
+                                                    <li class="list-group-item">
+                                                            <div class="row my-auto">
+                                                                <div class="col-12 col-sm-8 col-md-9 my-auto">
+                                                                    <input class="form-control" type="text" id="former_job" name="former_job[]" placeholder="Former Job..." value="{{ $fj }}">
+                                                                </div> 
+                                                                <div class="col-12 col-sm-4 col-md-3 my-auto">
+                                                                    <a class="btn btn-delete-field" onclick="addDeleteFieldEffect(this)">
+                                                                        <i class="bi bi-trash-fill"></i> 
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                    </li>
+                                                @endforeach
+                                            @else
+                                                <li class="list-group-item">
+                                                        <div class="row my-auto">
+                                                            <div class="col-12 col-sm-8 col-md-9 my-auto">
+                                                                <input class="form-control" type="text" id="former_job" name="former_job[]" placeholder="Former Job..." value="">
+                                                            </div> 
+                                                            <div class="col-12 col-sm-4 col-md-3 my-auto">
+                                                                <a class="btn btn-delete-field" onclick="addDeleteFieldEffect(this)">
+                                                                    <i class="bi bi-trash-fill"></i> 
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                </li>
+                                            @endif
+                                        </div>
                                         <li class="list-group-item center-text">
                                             <a class="btn btn-add" onclick="addFormerJobField()">
                                                 Add
@@ -167,19 +216,37 @@
                                         <h5 class="card-title">Skills</h5>
                                     </div>
                                     <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">
-                                                <div class="row my-auto">
-                                                    <div class="col-12 col-sm-8 col-md-9 my-auto">
-                                                        <input class="form-control" type="text" id="skill" name="skill[]" placeholder="Skill..." value="">
-                                                    </div> 
-                                                    <div class="col-12 col-sm-4 col-md-3 my-auto">
-                                                        <a class="btn btn-delete-field" onclick="addDeleteFieldEffect(this)">
-                                                            <i class="bi bi-trash-fill"></i> 
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                        </li>
-                                        <div id="skill_fields"></div>
+                                        <div id="skill_fields">
+                                            @if(isset($worker))
+                                                @foreach($worker->skills as $skill)
+                                                    <li class="list-group-item">
+                                                            <div class="row my-auto">
+                                                                <div class="col-12 col-sm-8 col-md-9 my-auto">
+                                                                    <input class="form-control" type="text" id="skill" name="skill[]" placeholder="Skill..." value="{{ $skill }}">
+                                                                </div> 
+                                                                <div class="col-12 col-sm-4 col-md-3 my-auto">
+                                                                    <a class="btn btn-delete-field" onclick="addDeleteFieldEffect(this)">
+                                                                        <i class="bi bi-trash-fill"></i> 
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                    </li>
+                                                @endforeach
+                                            @else
+                                                <li class="list-group-item">
+                                                        <div class="row my-auto">
+                                                            <div class="col-12 col-sm-8 col-md-9 my-auto">
+                                                                <input class="form-control" type="text" id="skill" name="skill[]" placeholder="Skill..." value="">
+                                                            </div> 
+                                                            <div class="col-12 col-sm-4 col-md-3 my-auto">
+                                                                <a class="btn btn-delete-field" onclick="addDeleteFieldEffect(this)">
+                                                                    <i class="bi bi-trash-fill"></i> 
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                </li>
+                                            @endif
+                                        </div>
                                         <li class="list-group-item center-text">
                                             <a class="btn btn-add" onclick="addSkillField()">
                                                 Add
@@ -195,19 +262,37 @@
                                         <h5 class="card-title">Languages</h5>
                                     </div>
                                     <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">
-                                                <div class="row my-auto">
-                                                    <div class="col-12 col-sm-8 col-md-9 my-auto">
-                                                        <input class="form-control" type="text" id="language" name="language[]" placeholder="Language..." value="">
-                                                    </div> 
-                                                    <div class="col-12 col-sm-4 col-md-3 my-auto" onclick="addDeleteFieldEffect(this)">
-                                                        <a class="btn btn-delete-field">
-                                                            <i class="bi bi-trash-fill"></i> 
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                        </li>
-                                        <div id="language_fields"></div>
+                                        <div id="language_fields">
+                                            @if(isset($worker))
+                                                @foreach($worker->languages as $language)
+                                                    <li class="list-group-item">
+                                                            <div class="row my-auto">
+                                                                <div class="col-12 col-sm-8 col-md-9 my-auto">
+                                                                    <input class="form-control" type="text" id="language" name="language[]" placeholder="Language..." value="{{ $language }}">
+                                                                </div> 
+                                                                <div class="col-12 col-sm-4 col-md-3 my-auto" onclick="addDeleteFieldEffect(this)">
+                                                                    <a class="btn btn-delete-field">
+                                                                        <i class="bi bi-trash-fill"></i> 
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                    </li>
+                                                @endforeach
+                                            @else
+                                                <li class="list-group-item">
+                                                        <div class="row my-auto">
+                                                            <div class="col-12 col-sm-8 col-md-9 my-auto">
+                                                                <input class="form-control" type="text" id="language" name="language[]" placeholder="Language..." value="">
+                                                            </div> 
+                                                            <div class="col-12 col-sm-4 col-md-3 my-auto" onclick="addDeleteFieldEffect(this)">
+                                                                <a class="btn btn-delete-field">
+                                                                    <i class="bi bi-trash-fill"></i> 
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                </li>
+                                            @endif
+                                        </div>
                                         <li class="list-group-item center-text">
                                             <a class="btn btn-add" onclick="addLanguageField()">
                                                 Add

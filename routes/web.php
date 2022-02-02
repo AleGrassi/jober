@@ -22,18 +22,17 @@ Route::post('/user/login',['as'=>'user.login', 'uses'=>'\App\Http\Controllers\Au
 Route::get('/user/logout',['as'=>'user.logout', 'uses'=>'\App\Http\Controllers\AuthController@logout']);
 Route::post('/user/register',['as'=>'user.register', 'uses'=>'\App\Http\Controllers\AuthController@registration']);
 
-
 Route::resource('company','\App\Http\Controllers\CompanyController');
-Route::get('/company/{id}/destroy',['as'=>'company.destroy', 'uses'=>'\App\Http\Controllers\CompanyController@destroy']);
-Route::get('/company/{id}/update',['as'=>'company.update', 'uses'=>'\App\Http\Controllers\CompanyController@update']);
+Route::get('/company/{company}/destroy',['as'=>'company.destroy', 'uses'=>'\App\Http\Controllers\CompanyController@destroy']);
+Route::get('/company/{company}/update',['as'=>'company.update', 'uses'=>'\App\Http\Controllers\CompanyController@update']);
 
 Route::resource('worker','\App\Http\Controllers\WorkerController');
-Route::get('/worker/{id}/destroy',['as'=>'worker.destroy', 'uses'=>'\App\Http\Controllers\WorkerController@destroy']);
-Route::get('/worker/{id}/update',['as'=>'worker.update', 'uses'=>'\App\Http\Controllers\WorkerController@update']);
+Route::get('/worker/{worker}/destroy',['as'=>'worker.destroy', 'uses'=>'\App\Http\Controllers\WorkerController@destroy']);
+Route::get('/worker/{worker}/update',['as'=>'worker.update', 'uses'=>'\App\Http\Controllers\WorkerController@update']);
 
 Route::resource('offer','\App\Http\Controllers\OfferController');
-Route::get('/offer/{id}/destroy',['as'=>'offer.destroy', 'uses'=>'\App\Http\Controllers\OfferController@destroy']);
-Route::get('/offer/{id}/update',['as'=>'offer.update', 'uses'=>'\App\Http\Controllers\OfferController@update']);
+Route::get('/offer/{offer}/destroy',['as'=>'offer.destroy', 'uses'=>'\App\Http\Controllers\OfferController@destroy']);
+Route::get('/offer/{offer}/update',['as'=>'offer.update', 'uses'=>'\App\Http\Controllers\OfferController@update']);
 
 Route::get('/',['as'=>'home', 'uses'=>'\App\Http\Controllers\FrontController@getHome']);
 
