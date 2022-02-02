@@ -109,6 +109,43 @@ class DataLayer{
         $language->worker_id = $worker;
         $language->save();
     }
+
+    //update elements
+    public function update_worker($id, $name, $surname, $image, $date_of_birth, $email, $main_profession, $nationality, $user_id){
+        $worker = Worker::find($id);
+        $worker->name = $name;
+        $worker->surname = $surname;
+        $worker->image = $image;
+        $worker->date_of_birth = $date_of_birth;
+        $worker->email = $email;
+        $worker->main_profession = $main_profession;
+        $worker->nationality = $nationality;
+        $worker->user_id = $user_id;
+        $worker->save();
+    }
+    
+    public function update_user_name($user_id, $new_name){
+        $user = User::find($user_id);
+        $user->name = $new_name;
+        $user->save();
+    }
+
+    //remove elements
+    public function delete_education($id){
+        Education::find($id)->delete();
+    }
+    
+    public function delete_former_job($id){
+        FormerJob::find($id)->delete();
+    }
+    
+    public function delete_skill($id){
+        Skill::find($id)->delete();
+    }
+    
+    public function delete_language($id){
+        Language::find($id)->delete();
+    }
     
     function console_log( $data ){
         echo '<script>';

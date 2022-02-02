@@ -15,7 +15,7 @@
 
 @section('corpo')
 @if(isset($worker->id))
-    <form name="worker" method="post" action="{{ route('worker.update', ['id' => $worker->id]) }}" enctype="multipart/form-data">
+    <form name="worker" method="post" action="{{ route('worker.update', ['worker' => $worker->id]) }}" enctype="multipart/form-data">
 @else
     <form name="worker" method="post" action="{{ route('worker.store') }}" enctype="multipart/form-data"> 
 @endif
@@ -28,7 +28,11 @@
                         <div class="my-auto">
                             <div class="basic-info-image-holder">
                                 <label for="profile_image">
-                                    <img id="image" class="card-img-top" src="{{ asset('storage/img/worker_profile/worker_profile_tmp.png') }}">
+                                    @if(isset($worker))
+                                        <img id="image" class="card-img-top" src="{{ asset('storage/img/worker_profile/'.$worker->image) }}">
+                                    @else
+                                        <img id="image" class="card-img-top" src="{{ asset('storage/img/worker_profile/worker_profile_tmp.png') }}">
+                                    @endif
                                     <input type="file" name="profile_image" id="profile_image" style="display:none;" accept="image/*" onchange="showImage(this)"/>
                                 </label>
                             </div>
@@ -125,7 +129,7 @@
                                                     <li class="list-group-item" id="education_field">
                                                             <div class="row my-auto">
                                                                 <div class="col-12 col-sm-8 col-md-9 my-auto">
-                                                                    <input class="form-control" type="text" id="education" name="education[]" placeholder="School or university..." value="{{ $education }}">
+                                                                    <input class="form-control" type="text" id="education" name="education[]" placeholder="School or university..." value="{{ $education->name }}">
                                                                 </div> 
                                                                 <div class="col-12 col-sm-4 col-md-3 my-auto">
                                                                     <a class="btn btn-delete-field" onclick="addDeleteFieldEffect(this)">
@@ -171,7 +175,7 @@
                                                     <li class="list-group-item">
                                                             <div class="row my-auto">
                                                                 <div class="col-12 col-sm-8 col-md-9 my-auto">
-                                                                    <input class="form-control" type="text" id="former_job" name="former_job[]" placeholder="Former Job..." value="{{ $fj }}">
+                                                                    <input class="form-control" type="text" id="former_job" name="former_job[]" placeholder="Former Job..." value="{{ $fj->name }}">
                                                                 </div> 
                                                                 <div class="col-12 col-sm-4 col-md-3 my-auto">
                                                                     <a class="btn btn-delete-field" onclick="addDeleteFieldEffect(this)">
@@ -222,7 +226,7 @@
                                                     <li class="list-group-item">
                                                             <div class="row my-auto">
                                                                 <div class="col-12 col-sm-8 col-md-9 my-auto">
-                                                                    <input class="form-control" type="text" id="skill" name="skill[]" placeholder="Skill..." value="{{ $skill }}">
+                                                                    <input class="form-control" type="text" id="skill" name="skill[]" placeholder="Skill..." value="{{ $skill->name }}">
                                                                 </div> 
                                                                 <div class="col-12 col-sm-4 col-md-3 my-auto">
                                                                     <a class="btn btn-delete-field" onclick="addDeleteFieldEffect(this)">
@@ -268,7 +272,7 @@
                                                     <li class="list-group-item">
                                                             <div class="row my-auto">
                                                                 <div class="col-12 col-sm-8 col-md-9 my-auto">
-                                                                    <input class="form-control" type="text" id="language" name="language[]" placeholder="Language..." value="{{ $language }}">
+                                                                    <input class="form-control" type="text" id="language" name="language[]" placeholder="Language..." value="{{ $language->name }}">
                                                                 </div> 
                                                                 <div class="col-12 col-sm-4 col-md-3 my-auto" onclick="addDeleteFieldEffect(this)">
                                                                     <a class="btn btn-delete-field">

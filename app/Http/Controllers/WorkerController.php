@@ -28,7 +28,7 @@ class WorkerController extends Controller
 
         $dl->console_log($request->input());
 
-        if($request->hasFile("profile_image")){
+        if($request->file("profile_image")!==null){
             $dl->console_log("ho un'immagine");
             $filenameWithExt = $request->file('profile_image')->getClientOriginalName();
             //Get just filename
@@ -102,8 +102,83 @@ class WorkerController extends Controller
         }
     } 
 
-    public function update(){
+    public function update(Request $request, $id){
+        $dl = new DataLayer();
+        $worker = $dl->find_worker_by_id($id);
+        $user_email = Auth::user()->email;
 
+        $dl->console_log($request->input());
+
+        if($request->hasFile("profile_image")){
+            $dl->console_log('immagine inserita');
+            $filenameWithExt = $request->file('profile_image')->getClientOriginalName();
+            //Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('profile_image')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $request->file('profile_image')->storeAs('public/img/worker_profile/',$fileNameToStore);
+        }else{
+            $dl->console_log('immagine non inserita');
+            $fileNameToStore = $worker->image;
+        }
+
+        $worker_id = $worker->id;
+        $user_id = Auth::user()->id; 
+        $dl->update_worker($worker_id, $request->input('name'), $request->input('surname'), $fileNameToStore, $request->input('date_of_birth'), $user_email, $request->input('main_profession'), $request->input('nationality'), $user_id);
+        $dl->update_user_name($user_id, $request->input('name'));
+
+        foreach($worker->educations as $edu){
+            $dl->delete_education($edu->id);
+        }
+        $educations = $request->input('education');
+        if(!empty($educations)){
+            foreach($educations as $edu){
+                if(!empty($edu)){
+                    $dl->add_education($edu, $worker_id);
+                }
+            }
+        }
+        
+        foreach($worker->skills as $s){
+            $dl->delete_skill($s->id);
+        }
+        $skills = $request->input('skill');
+        if(!empty($skills)){
+            foreach($skills as $s){
+                if(!empty($s)){
+                    $dl->add_skill($s, $worker_id);
+                }
+            }
+        }
+
+        foreach($worker->former_jobs as $fj){
+            $dl->delete_former_job($fj->id);
+        }
+        $former_jobs = $request->input('former_job');
+        if(!empty($former_jobs)){
+            foreach($former_jobs as $fj){
+                if(!empty($fj)){
+                    $dl->add_former_job($fj, $worker_id);
+                }
+            }
+        }
+
+        foreach($worker->languages as $l){
+            $dl->delete_language($l->id);
+        }
+        $languages = $request->input('language');
+        if(!empty($languages)){
+            foreach($languages as $l){
+                if(!empty($l)){
+                    $dl->add_language($l, $worker_id);
+                }
+            }
+        }
+        return Redirect::to(route('worker.show', ['worker' => $worker->id]));
+        
     } 
 
     public function destroy(){

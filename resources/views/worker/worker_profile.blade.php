@@ -70,12 +70,12 @@
                                 <h5 class="card-title">Education</h5>
                             </div>
                             <ul class="list-group list-group-flush">
-                                @if(isset($worker->educations))
-                                    <li class="list-group-item">This professional hasn't added any education entry</li>
-                                @else
+                                @if(count($worker->educations) > 0)
                                     @foreach($worker->educations as $education)
                                         <li class="list-group-item">{{ $education->name }}</li>
                                     @endforeach
+                                @else
+                                    <li class="list-group-item">This professional hasn't added any education entry</li>
                                 @endif
                             </ul>
                         </div>
@@ -87,12 +87,12 @@
                                 <h5 class="card-title">Former Jobs</h5>
                             </div>
                             <ul class="list-group list-group-flush">
-                                @if(isset($worker->former_jobs))
-                                    <li class="list-group-item">This professional hasn't added any former job entry</li>
-                                @else
+                                @if(count($worker->former_jobs) > 0)
                                     @foreach($worker->former_jobs as $job)
                                         <li class="list-group-item">{{ $job->name }}</li>
                                     @endforeach
+                                @else
+                                    <li class="list-group-item">This professional hasn't added any former job entry</li>
                                 @endif
                             </ul>
                         </div>
@@ -109,12 +109,12 @@
                                 <h5 class="card-title">Skills</h5>
                             </div>
                             <ul class="list-group list-group-flush">
-                                @if(isset($worker->skills))
-                                    <li class="list-group-item">This professional hasn't added any skill entry</li>
-                                @else
+                                @if(count($worker->skills) > 0)
                                     @foreach($worker->skills as $skill)
                                         <li class="list-group-item">{{ $skill->name }}</li>
                                     @endforeach
+                                @else
+                                    <li class="list-group-item">This professional hasn't added any skill entry</li>
                                 @endif
                             </ul>
                         </div>
@@ -126,12 +126,12 @@
                                 <h5 class="card-title">Languages</h5>
                             </div>
                             <ul class="list-group list-group-flush">
-                                @if(isset($worker->languages))
-                                    <li class="list-group-item">This professional hasn't added any language entry</li>
-                                @else
+                                @if(count($worker->languages) > 0)
                                     @foreach($worker->languages as $language)
                                         <li class="list-group-item">{{ $language->name }}</li>
                                     @endforeach
+                                @else
+                                    <li class="list-group-item">This professional hasn't added any language entry</li>
                                 @endif
                             </ul>
                         </div>
