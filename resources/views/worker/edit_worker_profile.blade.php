@@ -29,7 +29,7 @@
                         <div class="my-auto">
                             <div class="basic-info-image-holder">
                                 <label for="profile_image">
-                                    <img id="image" class="card-img-top" src="public/img/worker_profile/worker_profile_tmp.png">
+                                    <img id="image" class="card-img-top" src="{{ asset('storage/img/worker_profile/worker_profile_tmp.png') }}">
                                     <input type="file" name="profile_image" id="profile_image" style="display:none;" accept="image/*" onchange="showImage(this)"/>
                                 </label>
                             </div>

@@ -18,10 +18,10 @@
     <div class="row g-4">
 
         <div class="col-12 col-sm-3">
-            <div class="card basic-info-card">
+            <div class="card profile-image-card">
                 <div class="my-auto">
                     <div class="basic-info-image-holder">
-                        <img class="card-img-top" src="public/img/worker_profile/{{ $worker->image }}">
+                        <img class="card-img-top" src="{{ asset('storage/img/worker_profile/'.$worker->image) }}">
                     </div>
                 </div>
             </div>
@@ -49,24 +49,20 @@
         </div>
 
         <div class="col-12 col-sm-2">
-            <div class="card">
-                <a class="btn btn-contact"><!-- to do -->
-                    <p>Contact</p>
-                </a>
-            </div>  
-            <div class="card">
-                <a class="btn btn-contact" href="{{ route('worker.edit', ['worker'=>$worker->id]) }}">
-                    <p>Edit</p>
-                </a>
-            </div>  
+            <a class="btn btn-contact mb-2"><!-- to do -->
+                Contact
+            </a>
+            <a class="btn btn-contact" href="{{ route('worker.edit', ['worker'=>$worker->id]) }}">
+                Edit
+            </a>
         </div>        
     </div>
 </div>
 
 <div class="container top-buffer">
-        <div class="row row-cols-1 row-cols-sm-2">
+        <div class="row row-cols-1 row-cols-sm-2 mb-4">
 
-            <div class="container">
+            <div class="container mb-4">
                 <div class="row row-cols-1 g-4">
                     <div class="col">
                         <div class="card">
@@ -74,9 +70,13 @@
                                 <h5 class="card-title">Education</h5>
                             </div>
                             <ul class="list-group list-group-flush">
-                                @foreach($worker->educations as $education)
-                                <li class="list-group-item">{{ $education->name }}</li>
-                                @endforeach
+                                @if(isset($worker->educations))
+                                    <li class="list-group-item">This professional hasn't added any education entry</li>
+                                @else
+                                    @foreach($worker->educations as $education)
+                                        <li class="list-group-item">{{ $education->name }}</li>
+                                    @endforeach
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -87,9 +87,13 @@
                                 <h5 class="card-title">Former Jobs</h5>
                             </div>
                             <ul class="list-group list-group-flush">
-                                @foreach($worker->former_jobs as $job)
-                                <li class="list-group-item">{{ $job->name }}</li>
-                                @endforeach
+                                @if(isset($worker->former_jobs))
+                                    <li class="list-group-item">This professional hasn't added any former job entry</li>
+                                @else
+                                    @foreach($worker->former_jobs as $job)
+                                        <li class="list-group-item">{{ $job->name }}</li>
+                                    @endforeach
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -105,9 +109,13 @@
                                 <h5 class="card-title">Skills</h5>
                             </div>
                             <ul class="list-group list-group-flush">
-                                @foreach($worker->skills as $skill)
-                                <li class="list-group-item">{{ $skill->name }}</li>
-                                @endforeach
+                                @if(isset($worker->skills))
+                                    <li class="list-group-item">This professional hasn't added any skill entry</li>
+                                @else
+                                    @foreach($worker->skills as $skill)
+                                        <li class="list-group-item">{{ $skill->name }}</li>
+                                    @endforeach
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -118,9 +126,13 @@
                                 <h5 class="card-title">Languages</h5>
                             </div>
                             <ul class="list-group list-group-flush">
-                                @foreach($worker->languages as $language)
-                                <li class="list-group-item">{{ $language->name }}</li>
-                                @endforeach
+                                @if(isset($worker->languages))
+                                    <li class="list-group-item">This professional hasn't added any language entry</li>
+                                @else
+                                    @foreach($worker->languages as $language)
+                                        <li class="list-group-item">{{ $language->name }}</li>
+                                    @endforeach
+                                @endif
                             </ul>
                         </div>
                     </div>

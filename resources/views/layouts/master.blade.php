@@ -32,11 +32,15 @@
                     </ul>
                     <ul class="navbar-nav me-2 me-lg-0 navbar-right">
                         @auth
-                        <li><a><i>{{ trans('labels.welcome') }} {{ Auth::user()->name }}</i></a></li>
-                        <li>
-                            <a href="{{ route('logout') }}" 
+                        @if(Auth::user()->user_type == 'worker')
+                            <li class="nav-item"><a class="nav-link" href="{{ route('worker.show', ['worker' => Auth::user()->worker->id]) }}"><i class="bi bi-person-circle"></i> {{ Auth::user()->name }}</a></li>
+                        @else
+                            <li class="nav-item"><a class="nav-link" href="{{ route('company.show', ['company' => Auth::user()->company->id]) }}">{{ Auth::user()->name }}</a></li>
+                        @endif
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('logout') }}" 
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                {{ trans('labels.logout') }}
+                                <i class="bi bi-box-arrow-right"></i> {{ trans('labels.logout') }}
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf

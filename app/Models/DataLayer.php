@@ -50,6 +50,10 @@ class DataLayer{
         return Worker::where('user_id', $user_id)->get();
     }
 
+    public function find_company_by_user_id($user_id){
+        return Company::where('user_id', $user_id)->get();
+    }
+
     //delete elements
     public function delete_worker($worker_id){
         Worker::find($worker_id)->delete();

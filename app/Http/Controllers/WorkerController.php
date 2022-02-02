@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DataLayer;
+use Illuminate\Support\Facades\Redirect;
 
 class WorkerController extends Controller
 {
@@ -54,6 +55,7 @@ class WorkerController extends Controller
         $worker_id = $worker->id;
 
         $educations = $request->input('education');
+        $dl->console_log('educations is empty? '. empty($educations));
         if(!empty($educations)){
             foreach($educations as $edu){
                 if(!empty($edu)){
@@ -88,8 +90,7 @@ class WorkerController extends Controller
                 }
             }
         }
-
-        return view('worker.worker_profile')->with('worker', $worker);
+        return Redirect::to(route('worker.show', ['worker' => $worker->id]));
     } 
 
     public function show($id){
