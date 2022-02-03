@@ -48,6 +48,6 @@ class User extends Authenticatable
     }
 
     public function company() {
-        return $this->hasOne('App\Models\Worker');
+        return $this->hasOne('App\Models\Company');
     }
 }

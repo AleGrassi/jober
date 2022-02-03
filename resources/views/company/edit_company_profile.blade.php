@@ -27,7 +27,7 @@
         <div class="container">
             <div class="row g-4">
                 <div class="col-12 col-sm-3">
-                    <div class="card profile_image_card">
+                    <div class="card card-responsive">
                         <div class="my-auto">
                             <div class="basic-info-image-holder">
                                 <label for="profile_image">
@@ -49,7 +49,7 @@
                         <input id="name" type="text" class="form-control" name="name" placeholder="Company name..." value="{{ Auth::user()->name }}" required autofocus>
                     </div>
                     <div class="card company-contacts-card p-3 scroll">
-                        @if(isset($worker))
+                        @if(isset($company))
                             <textarea id="description" style="height:100%; resize:none;" class="form-control" name="description" placeholder="Company description..." required autofocus>{{ $company->description }}</textarea>
                         @else
                             <textarea id="description" style="height:100%; resize:none;" class="form-control" name="description" placeholder="Company description..." required autofocus></textarea>
@@ -86,7 +86,7 @@
                                                 <div class="row my-auto">
                                                     <div class="col-12 col-sm-8 col-md-9 my-auto">
                                                         <input class="form-control mb-2" type="text" id="location_name" name="location_name[]" placeholder="Location..." value="{{ $location->name }}">
-                                                        <input class="form-control mb-2" type="text" id="location_email" name="location_email[]" placeholder="Location email..." value="{{ $location->email }}">
+                                                        <input class="form-control mb-2" type="email" id="location_email" name="location_email[]" placeholder="Location email..." value="{{ $location->email }}">
                                                         <input class="form-control mb-2 mb-sm-0" type="text" id="location_phone" name="location_phone[]" placeholder="Location phone number..." value="{{ $location->phone }}">
                                                     </div> 
                                                     <div class="col-12 col-sm-4 col-md-3 my-auto">

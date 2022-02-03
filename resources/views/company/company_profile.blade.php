@@ -16,9 +16,9 @@
 <div class="container">
     <div class="row g-4">
         <div class="col-12 col-sm-3">
-            <div class="card company-info-card">
+            <div class="card">
                 <div class="my-auto">
-                    <div class="company-info-image-holder">
+                    <div class="basic-info-image-holder">
                         <img class="card-img-top" src="{{ asset('storage/img/company_profile/'.$company->image) }}">
                     </div>
                 </div>
@@ -37,15 +37,18 @@
         </div>
 
         <div class="col-12 col-sm-2">
-            <a class="btn btn-contact mb-2"><!-- to do -->
-                Contact
-            </a>
-            <a class="btn btn-contact mb-2" href="{{ route('company.edit', ['company'=>$company->id]) }}">
-                Edit
-            </a>
-            <a class="btn btn-contact" href="{{ route('offer.create', ['company'=>$company->id]) }}"><!-- conflitto di rotte, sistemare -->
-                Add Offer
-            </a>
+            @if(!isset(Auth::user()->company) OR Auth::user()->company->id !== $company->id)
+                <a class="btn btn-contact mb-2"><!-- to do -->
+                    Contact
+                </a>
+            @else
+                <a class="btn btn-contact mb-2" href="{{ route('company.edit', ['company'=>$company->id]) }}">
+                    Edit
+                </a>
+                <a class="btn btn-contact" href="{{ route('offer.create', ['company'=>$company->id]) }}"><!-- conflitto di rotte, sistemare -->
+                    Add Offer
+                </a>
+            @endif
         </div>        
     </div>
 </div>
@@ -58,15 +61,21 @@
                                 <h5 class="card-title">Locations</h5>
                             </div>
                             <ul class="list-group list-group-flush">
-                                @foreach($company->locations as $location)
-                                <li class="list-group-item">
-                                    <div class="row">
-                                        <div class="col">{{ $location->name }}</div>
-                                        <div class="col">{{ $location->email }}</div>
-                                        <div class="col">{{ $location->phone }}</div>
-                                    </div>
-                                </li>
-                                @endforeach
+                                @if(count($company->locations) > 0)
+                                    @foreach($company->locations as $location)
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col">{{ $location->name }}</div>
+                                            <div class="col">{{ $location->email }}</div>
+                                            <div class="col">{{ $location->phone }}</div>
+                                        </div>
+                                    </li>
+                                    @endforeach
+                                @else
+                                    <li class="list-group-item">
+                                        {{ $company->name }} hasn't added any location yet.    
+                                    </li>
+                                @endif
                             </ul>
                         </div>
             </div>
@@ -98,30 +107,40 @@
             </div> 
         </div>
 
-        @foreach($company_offers as $offer)        
-        <div class="col">
-            <a class="card-link" href="{{ route('offer.show',['offer'=> $offer->id]) }}">
-                <div class="card card-responsive">
-                    <div class="row row-cols-4">
-                        <div class="col my-auto">
-                            <div class="logo-img-holder">
-                                <img class="card-img-top" src="{{ url('/') }}/img/company_profile/{{ $offer->company->image }}">
+        @if(count($company->offers) > 0)
+            @foreach($company->offers as $offer)        
+            <div class="col">
+                <a class="card-link" href="{{ route('offer.show',['offer'=> $offer->id]) }}">
+                    <div class="card card-responsive">
+                        <div class="row row-cols-4">
+                            <div class="col my-auto">
+                                <div class="logo-img-holder">
+                                    <img class="card-img-top" src="{{ url('/') }}/img/company_profile/{{ $offer->company->image }}">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col text-center my-auto">
-                            <p class="my-auto">{{ $offer->company->name }}</p>
-                        </div>
-                        <div class="col my-auto text-center">
-                            <p class="my-auto">{{ $offer->title }}</p>
-                        </div>
-                        <div class="col my-auto text-center">
-                            <p class="my-auto">{{ $offer->location }}</p>
-                        </div>
-                    </div> 
+                            <div class="col text-center my-auto">
+                                <p class="my-auto">{{ $offer->company->name }}</p>
+                            </div>
+                            <div class="col my-auto text-center">
+                                <p class="my-auto">{{ $offer->title }}</p>
+                            </div>
+                            <div class="col my-auto text-center">
+                                <p class="my-auto">{{ $offer->location }}</p>
+                            </div>
+                        </div> 
+                    </div>
+                </a>
+            </div>
+            @endforeach
+        @else
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        There are no offers at the moment.
+                    </div>
                 </div>
-            </a>
-        </div>
-        @endforeach
+            </div>
+        @endif
     </div>
 </div>
 @endsection

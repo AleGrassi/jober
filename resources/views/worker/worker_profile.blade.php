@@ -18,7 +18,7 @@
     <div class="row g-4">
 
         <div class="col-12 col-sm-3">
-            <div class="card profile-image-card">
+            <div class="card">
                 <div class="my-auto">
                     <div class="basic-info-image-holder">
                         <img class="card-img-top" src="{{ asset('storage/img/worker_profile/'.$worker->image) }}">
@@ -49,12 +49,15 @@
         </div>
 
         <div class="col-12 col-sm-2">
-            <a class="btn btn-contact mb-2"><!-- to do -->
-                Contact
-            </a>
-            <a class="btn btn-contact" href="{{ route('worker.edit', ['worker'=>$worker->id]) }}">
-                Edit
-            </a>
+            @if(!isset(Auth::user()->worker) OR Auth::user()->worker->id !== $worker->id)
+                <a class="btn btn-contact mb-2"><!-- to do -->
+                    Contact
+                </a>
+            @else
+                <a class="btn btn-contact" href="{{ route('worker.edit', ['worker'=>$worker->id]) }}">
+                    Edit
+                </a>
+            @endif
         </div>        
     </div>
 </div>

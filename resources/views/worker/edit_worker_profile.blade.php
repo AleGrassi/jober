@@ -29,7 +29,7 @@
             <div class="row g-4 table-like">
                 
                 <div class="col-12 col-sm-3">
-                    <div class="card profile_image_card">
+                    <div class="card card-responsive">
                         <div class="my-auto">
                             <div class="basic-info-image-holder">
                                 <label for="profile_image">

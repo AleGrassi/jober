@@ -23,58 +23,23 @@
 
 @section('corpo')
 <div class="container">
-    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-4">
-
+    <div class="row g-4">
         @foreach($companies as $company)
-        <a class="card-link" href="{{ route('company.show', ['company' => $company->id]) }}">
-            <div class="col">
-                <div class="card card-responsive">
-                    <div class="image-holder">
-                        <img class="card-img-top" src="{{ url('/') }}/img/company_profile/{{ $company->image }}">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title text-center">{{ $company->name }}</h5>
+        <div class="col-6 col-sm-4 col-md-3">
+            <a class="card-link" href="{{ route('company.show', ['company' => $company->id]) }}">
+                <div class="col">
+                    <div class="card card-responsive">
+                        <div class="card-body">
+                            <div class="image-holder">
+                                <img class="card-img-top" src="{{ asset('storage/img/company_profile/'.$company->image) }}">
+                            </div>
+                            <h5 class="card-title text-center">{{ $company->name }}</h5>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </a>
+            </a>
+        </div>
         @endforeach
-        
-<!-- 
-        <div class="col">
-            <div class="card card-responsive">
-                <div class="image-holder">
-                    <img class="card-img-top" src="{{ url('/') }}/img/intel.png">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title text-center">Tesla Motors</h5>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card card-responsive">
-                <div class="image-holder">
-                    <img class="card-img-top" src="{{ url('/') }}/img/ibm.png">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title text-center">Tesla Motors</h5>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card card-responsive">
-                <div class="image-holder">
-                    <img class="card-img-top" src="{{ url('/') }}/img/ibm.png">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title text-center">Tesla Motors</h5>
-                </div>
-            </div>
-        </div>
--->
     </div>
-    
 </div>
 @endsection

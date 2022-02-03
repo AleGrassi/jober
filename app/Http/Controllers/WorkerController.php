@@ -40,6 +40,7 @@ class WorkerController extends Controller
             // Upload Image
             $path = $request->file('profile_image')->storeAs('public/img/worker_profile/',$fileNameToStore);
         }else{
+            $fileNameToStore = 'worker_profile_tmp.jpeg';
             $dl->console_log("non ho un'immagine");
         }
 
@@ -69,8 +70,8 @@ class WorkerController extends Controller
 
         $former_jobs = $request->input('former_job');
         if(!empty($former_jobs)){
-            foreach($former_jobs as $fb){
-                if(!empty($fb)){
+            foreach($former_jobs as $fj){
+                if(!empty($fj)){
                     $dl->add_former_job($fj, $worker_id);
                 }
             }

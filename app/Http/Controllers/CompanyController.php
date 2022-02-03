@@ -20,16 +20,52 @@ class CompanyController extends Controller
         return view('company.edit_company_profile');
     }
 
-    public function store(){
+    public function store(Request $request){
+        $dl = new DataLayer();
 
+        $user_id = auth()->id();
+        $user_email = Auth::user()->email;
+
+        $dl->console_log($request->input());
+
+        if($request->file("profile_image")!==null){
+            $dl->console_log("ho un'immagine");
+            $filenameWithExt = $request->file('profile_image')->getClientOriginalName();
+            //Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('profile_image')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $request->file('profile_image')->storeAs('public/img/company_profile/',$fileNameToStore);
+        }else{
+            $fileNameToStore = 'company_profile_tmp.jpeg';
+            $dl->console_log("non ho un'immagine");
+        }
+
+        $company = $dl->add_company($request->input('name'), $request->input('description'), $fileNameToStore, $user_email, $user_id);
+        $dl->console_log($company);
+        $company_id = $company->id;
+
+        $locations_names = $request->input('location_name');
+        $locations_emails = $request->input('location_email');
+        $locations_phones = $request->input('location_phone');
+        if(isset($locations_names)){
+            for($i=0; $i<count($locations_names); $i++){
+                if(!empty($locations_names[$i])){
+                    $dl->add_company_location($locations_names[$i], $locations_emails[$i], $locations_phones[$i], $company->id);
+                }
+            }
+        }
+        return Redirect::to(route('company.show', ['company' => $company->id]));
     } 
 
     public function show($id){
         $dl = new DataLayer();
         $company = $dl->find_company_by_id($id);
-        $company_offers = $dl->list_company_offers($id);
 
-        return view('company.company_profile')->with('company',$company)->with('company_offers',$company_offers);
+        return view('company.company_profile')->with('company',$company);
     } 
     
     public function edit($id){
@@ -40,8 +76,49 @@ class CompanyController extends Controller
         }
     } 
 
-    public function update(){
+    public function update(Request $request, $id){
+        $dl = new DataLayer();
+        $company = $dl->find_company_by_id($id);
 
+        $user_id = auth()->id();
+        $user_email = Auth::user()->email;
+
+        $dl->console_log($request->input());
+
+        if($request->hasFile("profile_image")){
+            $dl->console_log("ho un'immagine");
+            $filenameWithExt = $request->file('profile_image')->getClientOriginalName();
+            //Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('profile_image')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $request->file('profile_image')->storeAs('public/img/company_profile/',$fileNameToStore);
+        }else{
+            $fileNameToStore = $company->image;
+            $dl->console_log("non ho un'immagine");
+        }
+
+        $dl->update_company($id, $request->input('name'), $request->input('description'), $fileNameToStore, $user_email, $user_id);
+        $dl->update_user_name($user_id, $request->input('name'));
+
+        foreach($company->locations as $location){
+            $dl->delete_company_location($location->id);
+        }
+
+        $locations_names = $request->input('location_name');
+        $locations_emails = $request->input('location_email');
+        $locations_phones = $request->input('location_phone');
+        if(isset($locations_names)){
+            for($i=0; $i<count($locations_names); $i++){
+                if(!empty($locations_names[$i])){
+                    $dl->add_company_location($locations_names[$i], $locations_emails[$i], $locations_phones[$i], $id);
+                }
+            }
+        }
+        return Redirect::to(route('company.show', ['company' => $id]));
     } 
 
     public function destroy(){

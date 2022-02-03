@@ -110,6 +110,26 @@ class DataLayer{
         $language->save();
     }
 
+    public function add_company($name, $description, $image, $email, $user_id){
+        $company = new Company();
+        $company->name = $name;
+        $company->description = $description;
+        $company->image = $image;
+        $company->email = $email;
+        $company->user_id = $user_id;
+        $company->save();
+        return $company;
+    }
+
+    public function add_company_location($name, $email, $phone, $company_id){
+        $location = new CompanyLocation();
+        $location->name = $name;
+        $location->email = $email;
+        $location->phone = $phone;
+        $location->company_id = $company_id;
+        $location->save();
+    }
+
     //update elements
     public function update_worker($id, $name, $surname, $image, $date_of_birth, $email, $main_profession, $nationality, $user_id){
         $worker = Worker::find($id);
@@ -146,11 +166,25 @@ class DataLayer{
     public function delete_language($id){
         Language::find($id)->delete();
     }
+
+    public function delete_company_location($id){
+        CompanyLocation::find($id)->delete();
+    }
     
     function console_log( $data ){
         echo '<script>';
         echo 'console.log('. json_encode( $data ) .')';
         echo '</script>';
+    }
+
+    public function update_company($company_id, $name, $description, $image, $email, $user_id){
+        $company = Company::find($company_id);
+        $company->name = $name;
+        $company->description = $description;
+        $company->image = $image;
+        $company->email = $email;
+        $company->user_id = $user_id;
+        $company->save();
     }
 }
 
