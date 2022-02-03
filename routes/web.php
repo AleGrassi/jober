@@ -51,11 +51,7 @@ Route::get('/off',['as'=>'off',function(){
 Route::get('/off/edit',['as'=>'edit_offer',function(){
     return view('company/edit_offer');
 }]);
-/*
-Route::get('/worker/edit',['as'=>'worker.edit',function(){
-    return view('worker/edit_worker_profile');
-}]);
-*/
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DataLayer;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 
 class CompanyController extends Controller
 {
     public function index(){
-        session_start();
-
         $dl = new DataLayer();
         $companies = $dl->list_companies();
 
@@ -25,8 +25,6 @@ class CompanyController extends Controller
     } 
 
     public function show($id){
-        session_start();
-
         $dl = new DataLayer();
         $company = $dl->find_company_by_id($id);
         $company_offers = $dl->list_company_offers($id);
@@ -34,8 +32,12 @@ class CompanyController extends Controller
         return view('company.company_profile')->with('company',$company)->with('company_offers',$company_offers);
     } 
     
-    public function edit(){
-
+    public function edit($id){
+        if($id == Auth::user()->company->id){
+            return view('company.edit_company_profile')->with('company', Auth::user()->company);
+        }else{
+            return Redirect::to(route('company.show', ['company' => $id]));
+        }
     } 
 
     public function update(){

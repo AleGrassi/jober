@@ -9,8 +9,13 @@
 
 
 @section('breadcrumb')
-<li class="breadcrumb-item ms-auto"><a href="{{ route('worker.index') }}">Professionals</a></li>
-<li class="breadcrumb-item active"><a href="#">worker-name</a></li>
+    @if(isset($worker))
+        <li class="breadcrumb-item ms-auto"><a href="{{ route('worker.index') }}">Professionals</a></li>
+        <li class="breadcrumb-item active"><a href="{{ route('worker.show', ['worker'=> $worker->id]) }}">{{ $worker->name }} {{ $worker->surname }}</a></li>
+        <li class="breadcrumb-item active"><a href="#">Edit</a></li>
+    @else
+        <li class="breadcrumb-item ms-auto"><a href="#">Registration</a></li>
+    @endif
 @endsection
 
 @section('corpo')
@@ -103,10 +108,14 @@
 
 
                 <div class="col-12 col-sm-2">
-                    <button class="btn btn-contact mb-2">
-                        Contact
-                    </button>
-                    <input id="mySubmit" type="submit" class="btn btn-contact" value="Save"/>
+                    <input id="mySubmit" type="submit" class="btn btn-contact mb-2" value="Save"/>
+                    @if(isset($worker))
+                        <a class="btn btn-contact" href="{{ route('worker.show',['worker'=> $worker->id]) }}">
+                            Cancel
+                        </a>
+                    @else
+                        <!-- Da gestire -->
+                    @endif
                 </div>    
             </div>
         </div>

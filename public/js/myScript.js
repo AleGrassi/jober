@@ -1,4 +1,6 @@
 
+// Edit Worker
+
 function addDeleteFieldEffect(elm){
     $(elm).closest("li").remove();        
 }
@@ -86,4 +88,26 @@ function showImage (input) {
 
         reader.readAsDataURL(input.files[0]);
     }
+}
+
+// Edit Company
+
+function addLocationField(){
+    var container = $("#location_fields");
+    var child = $(`<li class="list-group-item" id="location_field">
+                        <div class="row my-auto">
+                            <div class="col-12 col-sm-8 col-md-9 my-auto">
+                                <input class="form-control mb-2" type="text" id="location_name" name="location_name[]" placeholder="Location..." value="">
+                                <input class="form-control mb-2" type="text" id="location_email" name="location_email[]" placeholder="Location email..." value="">
+                                <input class="form-control mb-2 mb-sm-0" type="text" id="location_phone" name="location_phone[]" placeholder="Location phone number..." value="">
+                            </div> 
+                            <div class="col-12 col-sm-4 col-md-3 my-auto">
+                                <a class="btn btn-delete-field" onclick="addDeleteFieldEffect(this)">
+                                    <i class="bi bi-trash-fill"></i> 
+                                </a>
+                            </div>
+                        </div>
+                    </li>`);
+
+    container.append(child);
 }

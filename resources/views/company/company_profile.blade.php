@@ -15,12 +15,11 @@
 @section('corpo')
 <div class="container">
     <div class="row g-4">
-
         <div class="col-12 col-sm-3">
             <div class="card company-info-card">
                 <div class="my-auto">
                     <div class="company-info-image-holder">
-                        <img class="card-img-top" src="{{ url('/') }}/img/company_profile/{{ $company->image }}">
+                        <img class="card-img-top" src="{{ asset('storage/img/company_profile/'.$company->image) }}">
                     </div>
                 </div>
             </div>
@@ -38,17 +37,16 @@
         </div>
 
         <div class="col-12 col-sm-2">
-            <div class="card">
-                <a class="btn btn-contact">
-                    <p>Contact</p>
-                </a>
-            </div>  
-            <div class="card">
-                <a class="btn btn-contact" href="{{ route('company.edit', ['company' => $company->id]) }}">
-                    <p>Edit</p>
-                </a>
-            </div>  
-        </div>    
+            <a class="btn btn-contact mb-2"><!-- to do -->
+                Contact
+            </a>
+            <a class="btn btn-contact mb-2" href="{{ route('company.edit', ['company'=>$company->id]) }}">
+                Edit
+            </a>
+            <a class="btn btn-contact" href="{{ route('offer.create', ['company'=>$company->id]) }}"><!-- conflitto di rotte, sistemare -->
+                Add Offer
+            </a>
+        </div>        
     </div>
 </div>
 
@@ -79,7 +77,7 @@
 
 
 <br>
-<div class="container top-buffer">
+<div class="container top-buffer mb-4">
     <div class="row row-cols-1 g-4">
         <h1>Offers:</h1>
     </div>
@@ -124,9 +122,6 @@
             </a>
         </div>
         @endforeach
-
-
-
     </div>
 </div>
 @endsection
