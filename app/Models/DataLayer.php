@@ -130,6 +130,32 @@ class DataLayer{
         $location->save();
     }
 
+    public function add_offer($title, $description, $location, $starting_salary, $education_requirements, $company_id){
+        $offer = new Offer();
+        $offer->title = $title;
+        $offer->description = $description;
+        $offer->location = $location;
+        $offer->starting_salary = $starting_salary;
+        $offer->education_requirements = $education_requirements;
+        $offer->company_id = $company_id;
+        $offer->save();
+        return $offer;
+    }
+
+    public function add_skill_requirement($name, $offer_id){
+        $skill_requirement = new SkillRequirement();
+        $skill_requirement->name = $name;
+        $skill_requirement->offer_id = $offer_id;
+        $skill_requirement->save();
+    }
+
+    public function add_language_requirement(){
+        $language_requirement = new LanguageRequirement();
+        $language_requirement->name = $name;
+        $language_requirement->offer_id = $offer_id;
+        $language_requirement->save();
+    }
+
     //update elements
     public function update_worker($id, $name, $surname, $image, $date_of_birth, $email, $main_profession, $nationality, $user_id){
         $worker = Worker::find($id);
@@ -148,6 +174,31 @@ class DataLayer{
         $user = User::find($user_id);
         $user->name = $new_name;
         $user->save();
+    }
+
+    public function update_offer($id, $title, $description, $location, $starting_salary, $education_requirements, $company_id){
+        $offer = Offer::find($id);
+        $offer->title = $title;
+        $offer->description = $description;
+        $offer->location = $location;
+        $offer->starting_salary = $starting_salary;
+        $offer->education_requirements = $education_requirements;
+        $offer->company_id = $company_id;
+        $offer->save();
+    }
+
+    public function update_skill_requirement($id, $name, $offer_id){
+        $skill_requirement = SkillRequirement::find($id);
+        $skill_requirement->name = $name;
+        $skill_requirement->offer_id = $offer_id;
+        $skill_requirement->save();
+    }
+
+    public function update_language_requirement($id, $name, $offer_id){
+        $language_requirement = LanguageRequirement::find($id);
+        $language_requirement->name = $name;
+        $language_requirement->offer_id = $offer_id;
+        $language_requirement->save();
     }
 
     //remove elements

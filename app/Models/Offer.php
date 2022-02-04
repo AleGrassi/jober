@@ -10,7 +10,7 @@ class Offer extends Model
     use HasFactory;
 
     protected $table = 'offer';
-    protected $fillable = ['title','description','starting_salary','company_id','education_requirements'];
+    protected $fillable = ['title','description','location','starting_salary','company_id','education_requirements'];
 
     public function company(){
         return $this->belongsTo('App\Models\Company');

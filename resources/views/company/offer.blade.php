@@ -21,7 +21,7 @@
             <a  class="card-link" href="{{ route('company.show', ['company'=> $offer->company->id]) }}">
                 <div class="card card-responsive">
                     <div class="image-holder">
-                        <img class="card-img-top" src="{{ url('/') }}/img/company_profile/{{ $offer->company->image }}">
+                        <img class="card-img-top" src="{{ asset('storage/img/company_profile/'.$offer->company->image) }}">
                     </div>
                     <div class="card-body">
                         <h6 class="card-title text-center">{{ $offer->company->name }}</h6>
@@ -47,16 +47,12 @@
         </div>
 
         <div class="col-12 col-sm-2">
-            <div class="card">
-                <a class="btn btn-contact">
-                    <p>Candidate</p>
-                </a>
-            </div>  
-            <div class="card">
-                <a class="btn btn-contact" href="{{ route('edit_offer') }}">
-                    <p>Edit</p>
-                </a>
-            </div>  
+            <a class="btn btn-contact mb-2">
+                Candidate
+            </a>
+            <a class="btn btn-contact" href="{{ route('offer.edit', ['offer'=> $offer->id]) }}">
+                Edit
+            </a>
         </div>    
     </div>
 </div>

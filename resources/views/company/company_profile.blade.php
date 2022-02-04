@@ -45,7 +45,7 @@
                 <a class="btn btn-contact mb-2" href="{{ route('company.edit', ['company'=>$company->id]) }}">
                     Edit
                 </a>
-                <a class="btn btn-contact" href="{{ route('offer.create', ['company'=>$company->id]) }}"><!-- conflitto di rotte, sistemare -->
+                <a class="btn btn-contact" href="{{ route('offer.create') }}">
                     Add Offer
                 </a>
             @endif

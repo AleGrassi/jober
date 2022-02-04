@@ -77,6 +77,42 @@ function addLanguageField(){
     container.append(child);
 }
 
+function addSkillRequirementField(){
+    var container = $("#skill_requirement_fields");
+    var child = $(`<li class="list-group-item" id="skill_requirement_field">
+                    <div class="row my-auto">
+                        <div class="col-12 col-sm-8 col-md-9 my-auto">
+                            <input class="form-control" type="text" id="skill_requirement" name="skill_requirement[]" placeholder="Skill requirement...">
+                        </div> 
+                        <div class="col-12 col-sm-4 col-md-3 my-auto">
+                            <a class="btn btn-delete-field" onclick="addDeleteFieldEffect(this)">
+                                <i class="bi bi-trash-fill"></i> 
+                            </a>
+                        </div>
+                    </div>
+                </li>`);
+
+    container.append(child);
+}
+
+function addLanguageRequirementField(){
+    var container = $("#language_requirement_fields");
+    var child = $(`<li class="list-group-item" id="language_requirement_field">
+                        <div class="row my-auto">
+                            <div class="col-12 col-sm-8 col-md-9 my-auto">
+                                <input class="form-control" type="text" id="language_requirement" name="language_requirement[]" placeholder="Language requirement...">
+                            </div> 
+                            <div class="col-12 col-sm-4 col-md-3 my-auto">
+                                <a class="btn btn-delete-field" onclick="addDeleteFieldEffect(this)">
+                                    <i class="bi bi-trash-fill"></i> 
+                                </a>
+                            </div>
+                        </div>
+                    </li>`);
+
+    container.append(child);
+}
+
 function showImage (input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
