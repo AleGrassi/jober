@@ -148,7 +148,7 @@ function addLocationField(){
     container.append(child);
 }
 
-function getAge(dateString) {
+function computeAge(dateString) {
     var today = new Date();
     var birthDate = new Date(dateString);
     var age = today.getFullYear() - birthDate.getFullYear();
@@ -156,5 +156,6 @@ function getAge(dateString) {
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
         age--;
     }
-    document.getElementById('birth_date').innerHTML = age;
+    return age;
 }
+

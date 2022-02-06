@@ -53,7 +53,7 @@
                             <p class="my-auto">{{ $worker->name }} {{ $worker->surname }}</p>
                         </div>
                         <div class="col my-auto text-center">
-                            <p class="my-auto">{{ $worker->date_of_birth }}</p>
+                            <p class="age my-auto">{{ $worker->date_of_birth }}</p>
                         </div>
                         <div class="col my-auto text-center">
                             <p class="my-auto">{{ $worker->main_profession }}</p>
@@ -63,79 +63,15 @@
             </a>
         </div>
         @endforeach
-        
-        
-<!--        
-        <div class="col">
-            <a class="card-link" href="{{ route('worker-profile') }}">  
-                <div class="card card-responsive">
-                    <div class="row row-cols-4">
-                        <div class="col my-auto">
-                            <div class="profile-img-holder">
-                                <img class="card-img-top" src="{{ url('/') }}/img/profile_img/1.jpeg">
-                            </div>
-                        </div>
-                        <div class="col text-center my-auto">
-                            <p class="my-auto">Alessandra Barbarossa</p>
-                        </div>
-                        <div class="col my-auto text-center">
-                            <p class="my-auto">30</p>
-                        </div>
-                        <div class="col my-auto text-center">
-                            <p class="my-auto">Segretaria</p>
-                        </div>
-                    </div> 
-                </div>
-            </a>
-        </div>
-        
-
-        <div class="col">
-            <div class="card card-responsive">
-                <div class="row row-cols-4">
-                    <div class="col my-auto">
-                        <div class="profile-img-holder">
-                            <img class="card-img-top" src="{{ url('/') }}/img/profile_img/3.jpeg">
-                        </div>
-                    </div>
-                    <div class="col text-center my-auto">
-                        <p class="my-auto">Mario Verdi</p>
-                    </div>
-                    <div class="col my-auto text-center">
-                        <p class="my-auto">32</p>
-                    </div>
-                    <div class="col my-auto text-center">
-                        <p class="my-auto">Programmatore</p>
-                    </div>
-                </div> 
-            </div>
-        </div>
-            
-
-        <div class="col">
-            <div class="card card-responsive">
-                <div class="row row-cols-4">
-                    <div class="col my-auto">
-                        <div class="profile-img-holder">
-                            <img class="card-img-top" src="{{ url('/') }}/img/profile_img/4.jpeg">
-                        </div>
-                    </div>
-                    <div class="col text-center my-auto">
-                        <p class="my-auto">Miori Xinhao</p>
-                    </div>
-                    <div class="col my-auto text-center">
-                        <p class="my-auto">28</p>
-                    </div>
-                    <div class="col my-auto text-center">
-                        <p class="my-auto">Analista</p>
-                    </div>
-                </div> 
-            </div>
-        </div>
-
--->
-
-
     </div>
 </div>
+
+<script>
+$('.age').each(function(index){
+    let birth_date = $(this).text();
+    let age = computeAge(birth_date);
+    $(this).text(age);
+});
+</script>
+
 @endsection

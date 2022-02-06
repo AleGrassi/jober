@@ -50,7 +50,7 @@
 
         <div class="col-12 col-sm-2">
             @if(!isset(Auth::user()->worker) OR Auth::user()->worker->id !== $worker->id)
-                <a class="btn btn-contact mb-2" href="{{ route('worker.contact', ['worker'=>$worker->id]) }}"><!-- to do -->
+                <a class="btn btn-contact mb-2" href="{{ route('worker.contact', ['worker'=>$worker->id]) }}">
                     Contact
                 </a>
             @else
@@ -149,7 +149,8 @@
 </div>
 
 <script>
-var birth_date = @json($worker->date_of_birth);
-getAge(birth_date);
+let birth_date = @json($worker->date_of_birth);
+let age = computeAge(birth_date);
+document.getElementById('birth_date').innerHTML = age;
 </script>
 @endsection

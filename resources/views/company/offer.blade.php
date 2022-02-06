@@ -178,46 +178,35 @@
 
         @if(count($offer->candidates) > 0)
             @foreach($offer->candidates as $candidate)
-            <div class="col-12 my-auto">
-                <a class="card-link" href="{{ route('worker.show', ['worker'=>$candidate->id]) }}">
-                    <div class="card card-responsive my-auto">
-                        <div class="container my-auto">
-                            <div class="row g-4 my-auto">
-                                <div class="col-12 my-auto">
-                                    <div class="container my-auto">
-                                        <div class="row my-auto">
-                                            <div class="col-3 my-auto">
-                                                <div class="logo-img-holder">
-                                                    <img class="card-img-top" src="{{ asset('storage/img/worker_profile/'.$candidate->image) }}">
-                                                </div>
-                                            </div>
-                                            <div class="col-3 text-center my-auto">
-                                                <p class="my-auto">{{ $candidate->name }}</p>
-                                            </div>
-                                            <div class="col-3 my-auto text-center">
-                                                <p class="my-auto">{{ $candidate->main_profession }}</p>
-                                            </div>
-                                            <div class="col-3 my-auto">
-                                                <div class="container my-auto">
-                                                    <div class="row my-auto">
-                                                        <form method="get" action="{{ route('offer.reject', ['offer'=>$offer->id, 'worker'=>$candidate->id]) }}">
-                                                            <button type="submit" class="btn btn-contact d-block mb-2 mt-2">Reject</button>
-                                                        </form>
-                                                        <form method="get" action="{{ route('worker.contact', ['worker'=>$candidate->id]) }}">
-                                                            <button type="submit" class="btn btn-contact d-block mb-2">Contact</button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
+                <div class="col-12 my-auto mb-2">
+                    <a class="card-link" href="{{ route('worker.show', ['worker'=>$candidate->id]) }}">
+                        <div class="card card-responsive my-auto">
+                            <div class="container">
+                                <div class="row g-4 my-auto">
+                                    <div class="col-3 my-auto">
+                                        <div class="logo-img-holder">
+                                            <img class="card-img-top" src="{{ asset('storage/img/worker_profile/'.$candidate->image) }}">
                                         </div>
+                                    </div>
+                                    <div class="col-3 text-center my-auto">
+                                        <p class="my-auto">{{ $candidate->name }}</p>
+                                    </div>
+                                    <div class="col-3 my-auto text-center">
+                                        <p class="my-auto">{{ $candidate->main_profession }}</p>
+                                    </div>
+                                    <div class="col-3 g-4 my-auto text-center">
+                                        <form method="get" action="{{ route('offer.reject', ['offer'=>$offer->id, 'worker'=>$candidate->id]) }}">
+                                            <button type="submit" class="btn btn-sm btn-contact d-block mb-2 mt-2">Reject</button>
+                                        </form>
+                                        <form method="get" action="{{ route('worker.contact', ['worker'=>$candidate->id]) }}">
+                                            <button type="submit" class="btn btn-sm btn-contact d-block mb-2">Contact</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </a>
-                
-            </div>
+                    </a>
+                </div>
             @endforeach
         @else
             <div class="col">

@@ -112,7 +112,11 @@ class OfferController extends Controller
     }
 
     public function rejectCandidate($offer_id, $candidate_id){
-
+       $dl = new DataLayer();
+       $offer = $dl->find_offer_by_id($offer_id);
+       
+       $offer->candidates()->detach($candidate_id);
+       return Redirect::to(route('offer.show',['offer'=>$offer_id]));
     }
 
     public function destroy(){
