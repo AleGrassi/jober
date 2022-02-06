@@ -40,7 +40,7 @@
                     <div class="col padded-text">
                         <p>{{ $worker->name }}</p>
                         <p>{{ $worker->surname }}</p>
-                        <p>{{ $worker->date_of_birth }}</p>
+                        <p id="birth_date"></p>
                         <p>{{ $worker->nationality }}</p>
                         <p>{{ $worker->main_profession }}</p>
                     </div>
@@ -50,7 +50,7 @@
 
         <div class="col-12 col-sm-2">
             @if(!isset(Auth::user()->worker) OR Auth::user()->worker->id !== $worker->id)
-                <a class="btn btn-contact mb-2"><!-- to do -->
+                <a class="btn btn-contact mb-2" href="{{ route('worker.contact', ['worker'=>$worker->id]) }}"><!-- to do -->
                     Contact
                 </a>
             @else
@@ -146,7 +146,10 @@
 
 
 </div>
-
-
 </div>
+
+<script>
+var birth_date = @json($worker->date_of_birth);
+getAge(birth_date);
+</script>
 @endsection

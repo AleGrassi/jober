@@ -182,6 +182,10 @@ class WorkerController extends Controller
         
     } 
 
+    public function contact($id){
+
+    }
+
     public function destroy(){
 
     } 

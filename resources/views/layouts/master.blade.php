@@ -35,7 +35,7 @@
                         @if(Auth::user()->user_type == 'worker' AND isset(Auth::user()->worker))
                             <li class="nav-item"><a class="nav-link" href="{{ route('worker.show', ['worker' => Auth::user()->worker->id]) }}"><i class="bi bi-person-circle"></i> {{ Auth::user()->name }}</a></li>
                         @elseif(Auth::user()->user_type == 'company' AND isset(Auth::user()->company))
-                            <li class="nav-item"><a class="nav-link" href="{{ route('company.show', ['company' => Auth::user()->company->id]) }}">{{ Auth::user()->name }}</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('company.show', ['company' => Auth::user()->company->id]) }}"><i class="bi bi-person-circle"></i> {{ Auth::user()->name }}</a></li>
                         @endif
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('logout') }}" 

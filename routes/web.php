@@ -29,10 +29,13 @@ Route::post('/company/{company}/update',['as'=>'company.update', 'uses'=>'\App\H
 Route::resource('worker','\App\Http\Controllers\WorkerController');
 Route::get('/worker/{worker}/destroy',['as'=>'worker.destroy', 'uses'=>'\App\Http\Controllers\WorkerController@destroy']);
 Route::post('/worker/{worker}/update',['as'=>'worker.update', 'uses'=>'\App\Http\Controllers\WorkerController@update']);
+Route::get('/worker/{worker}/contact',['as'=>'worker.contact', 'uses'=>'\App\Http\Controllers\WorkerController@contact']);
 
 Route::resource('offer','\App\Http\Controllers\OfferController');
 Route::get('/offer/{offer}/destroy',['as'=>'offer.destroy', 'uses'=>'\App\Http\Controllers\OfferController@destroy']);
 Route::post('/offer/{offer}/update',['as'=>'offer.update', 'uses'=>'\App\Http\Controllers\OfferController@update']);
+Route::get('/offer/{offer}/{worker}/reject',['as'=>'offer.reject', 'uses'=>'\App\Http\Controllers\OfferController@rejectCandidate']);
+Route::get('/offer/{offer}/{worker}/candidate',['as'=>'offer.candidate', 'uses'=>'\App\Http\Controllers\OfferController@candidate']);
 
 Route::get('/',['as'=>'home', 'uses'=>'\App\Http\Controllers\FrontController@getHome']);
 

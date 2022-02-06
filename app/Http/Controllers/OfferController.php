@@ -101,6 +101,20 @@ class OfferController extends Controller
         return Redirect::to(route('offer.show', ['offer' => $id]));
     } 
 
+    public function candidate($offer_id, $worker_id){
+        $dl = new DataLayer();
+        $offer = $dl->find_offer_by_id($offer_id);
+        $worker = $dl->find_worker_by_id($worker_id);
+
+        $offer->candidates()->attach($worker);
+
+        return Redirect::to(route('offer.show',['offer'=>$offer]));
+    }
+
+    public function rejectCandidate($offer_id, $candidate_id){
+
+    }
+
     public function destroy(){
 
     } 

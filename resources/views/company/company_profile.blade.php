@@ -115,7 +115,7 @@
                         <div class="row row-cols-4">
                             <div class="col my-auto">
                                 <div class="logo-img-holder">
-                                    <img class="card-img-top" src="{{ url('/') }}/img/company_profile/{{ $offer->company->image }}">
+                                    <img class="card-img-top" src="{{ asset('storage/img/company_profile/'.$offer->company->image) }}">
                                 </div>
                             </div>
                             <div class="col text-center my-auto">
