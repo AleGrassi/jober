@@ -3,18 +3,18 @@
 @section('stile','style.css')
 
 @section('left_navbar')
-<li class="nav-item"><a class="nav-link" href="{{ route('company.index') }}">Companies</a></li>
-<li class="nav-item"><a class="nav-link" href="{{ route('worker.index') }}">Professionals</a></li>
+<li class="nav-item"><a class="nav-link" href="{{ route('company.index') }}">@lang('labels.companies')</a></li>
+<li class="nav-item"><a class="nav-link" href="{{ route('worker.index') }}">@lang('labels.professionals')</a></li>
 @endsection
 
 
 @section('breadcrumb')
-<li class="breadcrumb-item ms-auto"><a href="{{ route('company.index') }}">Companies</a></li>
+<li class="breadcrumb-item ms-auto"><a href="{{ route('company.index') }}">@lang('labels.companies')</a></li>
 <li class="breadcrumb-item active"><a href="{{ route('company.show', ['company'=> Auth::user()->company->id]) }}">{{ Auth::user()->company->name }}</a></li>
 @if(isset($offer))
-    <li class="breadcrumb-item active"><a href="#">Editing offer</a></li>
+    <li class="breadcrumb-item active"><a href="#">@lang('labels.editing_offer')</a></li>
 @else
-    <li class="breadcrumb-item active"><a href="#">New offer</a></li>
+    <li class="breadcrumb-item active"><a href="#">@lang('labels.new_offer')</a></li>
 @endif
 @endsection
 
@@ -51,7 +51,7 @@
                     </div>
                     <div class="card">
                             <div class="card-header">
-                                <h6 class="card-title">Location</h6>
+                                <h6 class="card-title">@lang('labels.location')</h6>
                             </div>
                             <div class="card-body">
                                 @if(isset($offer))
@@ -67,7 +67,7 @@
                 <div class="col-12 col-sm-2">
                     <input id="mySubmit" type="submit" class="btn btn-contact mb-2" value="Save"/>
                     <a class="btn btn-contact" href="{{ route('company.show',['company'=>Auth::user()->company->id]) }}">
-                        Cancel
+                        @lang('labels.cancel')
                     </a>
                 </div>
             </div>
@@ -78,7 +78,7 @@
                 <div class="col">
                     <div class="card">
                         <div class="card-header">
-                            <h6 class="card-title">Main Tasks, duties and Responsabilities</h6>
+                            <h6 class="card-title">@lang('labels.job_descriprion')</h6>
                         </div>
                         <div class="card-body">
                             @if(isset($offer))
@@ -94,7 +94,7 @@
                 <div class="col">
                     <div class="card">
                         <div class="card-header">
-                            <h6 class="card-title">Education Requirements</h6>
+                            <h6 class="card-title">@lang('labels.education_requirements')</h6>
                         </div>
                         <div class="card-body">
                             @if(isset($offer))
@@ -109,7 +109,7 @@
                 <div class="col">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">Skill requirements</h5>
+                            <h5 class="card-title">@lang('labels.skill_requirements')</h5>
                         </div>
                         <ul class="list-group list-group-flush">
                             <div id="skill_requirement_fields">
@@ -145,7 +145,7 @@
                             </div>
                             <li class="list-group-item center-text">
                                 <a class="btn btn-add" onclick="addSkillRequirementField()">
-                                    Add
+                                    @lang('labels.add')
                                 </a>
                             </li>
                         </ul>
@@ -155,7 +155,7 @@
                 <div class="col">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">Language requirements</h5>
+                            <h5 class="card-title">@lang('labels.language_requirements')</h5>
                         </div>
                         <ul class="list-group list-group-flush">
                             <div id="language_requirement_fields">
@@ -191,7 +191,7 @@
                             </div>
                             <li class="list-group-item center-text">
                                 <a class="btn btn-add" onclick="addLanguageRequirementField()">
-                                    Add
+                                    @lang('labels.add')
                                 </a>
                             </li>
                         </ul>
@@ -201,7 +201,7 @@
                 <div class="col">
                     <div class="card">
                         <div class="card-header">
-                            <h6 class="card-title">Starting salary</h6>
+                            <h6 class="card-title">@lang('labels.starting_salary')</h6>
                         </div>
                         <div class="card-body">
                             @if(isset($offer))

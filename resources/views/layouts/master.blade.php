@@ -5,17 +5,15 @@
         <title>@yield('titolo')</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
         <!-- Fogli di stile -->
-        <!-- <link rel="stylesheet" href="{{ url('/') }}/css/bootstrap.css"> -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ url('/') }}/css/@yield('stile')">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
         <!-- jQuery e plugin JavaScript -->
         <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
         <script src="{{ url('/') }}/js/myScript.js"></script>
-        <!-- <script src="{{ url('/') }}/js/bootstrap.min.js"></script> -->
     </head>
-    
+
     <body>
         <nav class="navbar navbar-expand-lg">
             <div class="container">
@@ -30,24 +28,42 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         @yield('left_navbar')
                     </ul>
-                    <ul class="navbar-nav me-2 me-lg-0 navbar-right">
-                        @auth
-                        @if(Auth::user()->user_type == 'worker' AND isset(Auth::user()->worker))
-                            <li class="nav-item"><a class="nav-link" href="{{ route('worker.show', ['worker' => Auth::user()->worker->id]) }}"><i class="bi bi-person-circle"></i> {{ Auth::user()->name }}</a></li>
-                        @elseif(Auth::user()->user_type == 'company' AND isset(Auth::user()->company))
-                            <li class="nav-item"><a class="nav-link" href="{{ route('company.show', ['company' => Auth::user()->company->id]) }}"><i class="bi bi-person-circle"></i> {{ Auth::user()->name }}</a></li>
-                        @endif
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('logout') }}" 
-                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <i class="bi bi-box-arrow-right"></i> {{ trans('labels.logout') }}
+                    <ul class="navbar-nav navbar-right">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="i" role="button" data-bs-toggle="dropdown">
+                                <img src="{{ asset('storage/img/flags/it.png') }}" class="brand-image" width="16px" alt="">
                             </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
+                            <ul class="dropdown-menu flags-dropdown">
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('lang.change',['lang'=>'it']) }}">
+                                        <img src="{{ asset('storage/img/flags/it.png') }}" class="brand-image" width="16px" alt="">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('lang.change',['lang'=>'en']) }}">
+                                        <img src="{{ asset('storage/img/flags/en.png') }}" class="brand-image" width="16px" alt="">
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
+
+                        @auth
+                            @if(Auth::user()->user_type == 'worker' AND isset(Auth::user()->worker))
+                                <li class="nav-item"><a class="nav-link" href="{{ route('worker.show', ['worker' => Auth::user()->worker->id]) }}"><i class="bi bi-person-circle"></i> {{ Auth::user()->name }}</a></li>
+                            @elseif(Auth::user()->user_type == 'company' AND isset(Auth::user()->company))
+                                <li class="nav-item"><a class="nav-link" href="{{ route('company.show', ['company' => Auth::user()->company->id]) }}"><i class="bi bi-person-circle"></i> {{ Auth::user()->name }}</a></li>
+                            @endif
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('logout') }}" 
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <i class="bi bi-box-arrow-right"></i> {{ trans('labels.logout') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </li>
                         @else
-                        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}"><span class="glyphicon glyphicon-user"></span> {{ trans('labels.login') }}</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('login') }}"><span class="glyphicon glyphicon-user"></span> {{ trans('labels.login') }}</a></li>
                         @endauth
                     </ul>
                 </div>

@@ -3,14 +3,14 @@
 @section('stile','style.css')
 
 @section('left_navbar')
-<li class="nav-item"><a class="nav-link" href="{{ route('company.index') }}">Companies</a></li>
-<li class="nav-item"><a class="nav-link" href="{{ route('worker.index') }}">Professionals</a></li>
+<li class="nav-item"><a class="nav-link" href="{{ route('company.index') }}">@lang('labels.companies')</a></li>
+<li class="nav-item"><a class="nav-link" href="{{ route('worker.index') }}">@lang('labels.professionals')</a></li>
 @endsection
 
 
 @section('breadcrumb')
-<li class="breadcrumb-item ms-auto"><a href="{{ route('offer.index') }}">Offers</a></li>
-<li class="breadcrumb-item active"><a href="#">{{ $offer->company->name }}'s offer</a></li>
+<li class="breadcrumb-item ms-auto"><a href="{{ route('offer.index') }}">@lang('labels.offers')</a></li>
+<li class="breadcrumb-item active"><a href="#">@lang('labels.companys_offer',['company'=>$offer->company->name])</a></li>
 @endsection
 
 @section('corpo')
@@ -37,7 +37,7 @@
             </div>
             <div class="card">
                     <div class="card-header">
-                        <h6 class="card-title">Location</h6>
+                        <h6 class="card-title">@lang('labels.location')</h6>
                     </div>
                     <div class="card-body">
                         <p>{{ $offer->location }}</p>
@@ -49,17 +49,16 @@
         <div class="col-12 col-sm-2">
             @if(isset(Auth::user()->company) AND Auth::user()->company->id == $offer->company->id)
                 <a class="btn btn-contact" href="{{ route('offer.edit', ['offer'=> $offer->id]) }}">
-                    Edit
+                    @lang('labels.edit')
                 </a>
             @elseif(!isset(Auth::user()->company))
-            <!-- qua la gestione deve essere fatta grazie ai middleware, non come e' fatta ora -->
                 @if(isset(Auth::user()->worker))
                     <a class="btn btn-contact mb-2" href="{{ route('offer.candidate', ['offer'=>$offer->id, 'worker'=>Auth::user()->worker->id]) }}">
-                        Candidate
+                        @lang('labels.candidate')
                     </a>
                 @else
                     <a class="btn btn-contact mb-2" href="{{ route('login') }}">
-                        Candidate
+                        @lang('labels.candidate')
                     </a>
                 @endif
             @endif
@@ -72,7 +71,7 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <h6 class="card-title">Main Tasks, duties and Responsabilities</h6>
+                        <h6 class="card-title">@lang('labels.job_descriprion')</h6>
                     </div>
                     <div class="card-body">
                         <div style="white-space: pre-line">{{ $offer->description }}</div>
@@ -84,11 +83,11 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <h6 class="card-title">Education Requirements</h6>
+                        <h6 class="card-title">@lang('labels.education_requirements')</h6>
                     </div>
                     @if(empty($offer->education_requirements))
                         <div class="card-body">
-                            <div style="white-space: pre-line">No education requirement was added</div>
+                            <div style="white-space: pre-line">@lang('labels.no_education_requirements')</div>
                         </div>
                     @else
                         <div class="card-body">
@@ -101,7 +100,7 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <h6 class="card-title">Skill Requirements</h6>
+                        <h6 class="card-title">@lang('labels.skill_requirements')</h6>
                     </div>
                     @if(count($offer->skill_requirements) > 0)
                         <ul class="list-group list-group-flush">
@@ -111,7 +110,7 @@
                         </ul>
                     @else
                         <div class="card-body">
-                            No skill requirement was added
+                            @lang('labels.no_skill_requirements')
                         </div>
                     @endif
                 </div>
@@ -120,7 +119,7 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <h6 class="card-title">Language Requirements</h6>
+                        <h6 class="card-title">@lang('labels.language_requirements')</h6>
                     </div>
                     @if(count($offer->language_requirements) > 0)
                         <ul class="list-group list-group-flush">
@@ -130,7 +129,7 @@
                         </ul>
                     @else
                         <div class="card-body">
-                            No education requirement was added
+                            @lang('labels.no_language_requirements')
                         </div>
                     @endif
                 </div>
@@ -139,11 +138,11 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <h6 class="card-title">Starting salary</h6>
+                        <h6 class="card-title">@lang('labels.starting_salary')</h6>
                     </div>
                     <div class="card-body">
                         @if(empty($offer->starting_salary))
-                            No starting salary has been specified
+                            @lang('labels.no_starting_salary')
                         @else
                             <div style="white-space: pre-line">{{ $offer->starting_salary }}</div>
                         @endif
@@ -165,10 +164,10 @@
                 <div class="row g-4">
                     <div class="col-3"></div>
                     <div class="col-3 text-center">
-                        <h4>Name</h4>
+                        <h4>@lang('labels.name')</h4>
                     </div>
                     <div class="col-3 text-center">
-                        <h4>Main profession</h4>
+                        <h4>@lang('labels.main_profession')</h4>
                     </div>
                     <div class="col-3"></div>
                 </div>
@@ -196,10 +195,10 @@
                                     </div>
                                     <div class="col-3 g-4 my-auto text-center">
                                         <form method="get" action="{{ route('offer.reject', ['offer'=>$offer->id, 'worker'=>$candidate->id]) }}">
-                                            <button type="submit" class="btn btn-sm btn-contact d-block mb-2 mt-2">Reject</button>
+                                            <button type="submit" class="btn btn-sm btn-contact d-block mb-2 mt-2">@lang('labels.reject')</button>
                                         </form>
                                         <form method="get" action="{{ route('worker.contact', ['worker'=>$candidate->id]) }}">
-                                            <button type="submit" class="btn btn-sm btn-contact d-block mb-2">Contact</button>
+                                            <button type="submit" class="btn btn-sm btn-contact d-block mb-2">@lang('labels.contact')</button>
                                         </form>
                                     </div>
                                 </div>
@@ -212,7 +211,7 @@
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        There are no candidates at the moment.
+                        @lang('labels.no_candidates')
                     </div>
                 </div>
             </div>

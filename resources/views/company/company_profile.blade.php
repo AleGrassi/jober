@@ -2,13 +2,13 @@
 @section('stile','style.css')
 
 @section('left_navbar')
-<li class="nav-item"><a class="nav-link" href="{{ route('company.index') }}">Companies</a></li>
-<li class="nav-item active"><a class="nav-link" href="{{ route('worker.index') }}">Professionals</a></li>
+<li class="nav-item"><a class="nav-link" href="{{ route('company.index') }}">@lang('labels.companies')</a></li>
+<li class="nav-item active"><a class="nav-link" href="{{ route('worker.index') }}">@lang('labels.professionals')</a></li>
 @endsection
 
 
 @section('breadcrumb')
-<li class="breadcrumb-item ms-auto"><a href="{{ route('company.index') }}">Companies</a></li>
+<li class="breadcrumb-item ms-auto"><a href="{{ route('company.index') }}">@lang('labels.companies')</a></li>
 <li class="breadcrumb-item active"><a href="#">{{ $company->name }}</a></li>
 @endsection
 
@@ -39,14 +39,14 @@
         <div class="col-12 col-sm-2">
             @if(!isset(Auth::user()->company) OR Auth::user()->company->id !== $company->id)
                 <a class="btn btn-contact mb-2"><!-- to do -->
-                    Contact
+                    @lang('labels.contact')
                 </a>
             @else
                 <a class="btn btn-contact mb-2" href="{{ route('company.edit', ['company'=>$company->id]) }}">
-                    Edit
+                    @lang('labels.edit')
                 </a>
                 <a class="btn btn-contact" href="{{ route('offer.create') }}">
-                    Add Offer
+                    @lang('labels.add_offer')
                 </a>
             @endif
         </div>        
@@ -58,7 +58,7 @@
             <div class="container">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title">Locations</h5>
+                                <h5 class="card-title">@lang('labels.locations')</h5>
                             </div>
                             <ul class="list-group list-group-flush">
                                 @if(count($company->locations) > 0)
@@ -73,7 +73,7 @@
                                     @endforeach
                                 @else
                                     <li class="list-group-item">
-                                        {{ $company->name }} hasn't added any location yet.    
+                                        @lang('labels.no_locations', ['company'=>$company->name])
                                     </li>
                                 @endif
                             </ul>
@@ -88,7 +88,7 @@
 <br>
 <div class="container top-buffer mb-4">
     <div class="row row-cols-1 g-4">
-        <h1>Offers:</h1>
+        <h1>@lang('labels.offers'):</h1>
     </div>
 
     <div class="row row-cols-1 g-4">
@@ -96,13 +96,13 @@
             <div class="row row-cols-4">
                 <div class="col"></div>
                 <div class="col text-center">
-                    <h4>Company</h4>
+                    <h4>@lang('labels.company')</h4>
                 </div>
                 <div class="col text-center">
-                    <h4>Role</h4>
+                    <h4>@lang('labels.role')</h4>
                 </div>
                 <div class="col text-center">
-                    <h4>Location</h4>
+                    <h4>@lang('labels.location')</h4>
                 </div>
             </div> 
         </div>
@@ -136,7 +136,7 @@
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        There are no offers at the moment.
+                        @lang('labels.no_offers')
                     </div>
                 </div>
             </div>

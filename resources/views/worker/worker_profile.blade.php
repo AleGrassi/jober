@@ -3,13 +3,13 @@
 
 
 @section('left_navbar')
-<li class="nav-item"><a class="nav-link" href="{{ route('company.index') }}">Companies</a></li>
-<li class="nav-item active"><a class="nav-link" href="{{ route('worker.index') }}">Professionals</a></li>
+<li class="nav-item"><a class="nav-link" href="{{ route('company.index') }}">@lang('labels.companies')</a></li>
+<li class="nav-item active"><a class="nav-link" href="{{ route('worker.index') }}">@lang('labels.professionals')</a></li>
 @endsection
 
 
 @section('breadcrumb')
-<li class="breadcrumb-item ms-auto"><a href="{{ route('worker.index') }}">Professionals</a></li>
+<li class="breadcrumb-item ms-auto"><a href="{{ route('worker.index') }}">@lang('labels.professionals')</a></li>
 <li class="breadcrumb-item active"><a href="#">{{ $worker->name }} {{ $worker->surname }}</a></li>
 @endsection
 
@@ -31,11 +31,11 @@
             <div class="card basic-info-card">
                 <div class="row row-cols-2">
                     <div class="col padded-text">
-                        <p>Name:</p>
-                        <p>Surname:</p>
-                        <p>Age:</p>
-                        <p>Nationality:</p>
-                        <p>Main profession:</p>
+                        <p>@lang('labels.name'):</p>
+                        <p>@lang('labels.surname'):</p>
+                        <p>@lang('labels.age'):</p>
+                        <p>@lang('labels.nationality'):</p>
+                        <p>@lang('labels.main_profession'):</p>
                     </div>
                     <div class="col padded-text">
                         <p>{{ $worker->name }}</p>
@@ -51,11 +51,11 @@
         <div class="col-12 col-sm-2">
             @if(!isset(Auth::user()->worker) OR Auth::user()->worker->id !== $worker->id)
                 <a class="btn btn-contact mb-2" href="{{ route('worker.contact', ['worker'=>$worker->id]) }}">
-                    Contact
+                    @lang('labels.contact')
                 </a>
             @else
                 <a class="btn btn-contact" href="{{ route('worker.edit', ['worker'=>$worker->id]) }}">
-                    Edit
+                    @lang('labels.edit')
                 </a>
             @endif
         </div>        
@@ -70,7 +70,7 @@
                     <div class="col">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title">Education</h5>
+                                <h5 class="card-title">@lang('labels.education')</h5>
                             </div>
                             <ul class="list-group list-group-flush">
                                 @if(count($worker->educations) > 0)
@@ -78,7 +78,7 @@
                                         <li class="list-group-item">{{ $education->name }}</li>
                                     @endforeach
                                 @else
-                                    <li class="list-group-item">This professional hasn't added any education entry</li>
+                                    <li class="list-group-item">@lang('labels.no_education')</li>
                                 @endif
                             </ul>
                         </div>
@@ -87,7 +87,7 @@
                     <div class="col">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title">Former Jobs</h5>
+                                <h5 class="card-title">@lang('labels.former_jobs')</h5>
                             </div>
                             <ul class="list-group list-group-flush">
                                 @if(count($worker->former_jobs) > 0)
@@ -95,7 +95,7 @@
                                         <li class="list-group-item">{{ $job->name }}</li>
                                     @endforeach
                                 @else
-                                    <li class="list-group-item">This professional hasn't added any former job entry</li>
+                                    <li class="list-group-item">@lang('labels.no_former_jobs')</li>
                                 @endif
                             </ul>
                         </div>
@@ -109,7 +109,7 @@
                     <div class="col">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title">Skills</h5>
+                                <h5 class="card-title">@lang('labels.skills')</h5>
                             </div>
                             <ul class="list-group list-group-flush">
                                 @if(count($worker->skills) > 0)
@@ -117,7 +117,7 @@
                                         <li class="list-group-item">{{ $skill->name }}</li>
                                     @endforeach
                                 @else
-                                    <li class="list-group-item">This professional hasn't added any skill entry</li>
+                                    <li class="list-group-item">@lang('labels.no_skills')</li>
                                 @endif
                             </ul>
                         </div>
@@ -126,7 +126,7 @@
                     <div class="col">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title">Languages</h5>
+                                <h5 class="card-title">@lang('labels.languages')</h5>
                             </div>
                             <ul class="list-group list-group-flush">
                                 @if(count($worker->languages) > 0)
@@ -134,7 +134,7 @@
                                         <li class="list-group-item">{{ $language->name }}</li>
                                     @endforeach
                                 @else
-                                    <li class="list-group-item">This professional hasn't added any language entry</li>
+                                    <li class="list-group-item">@lang('labels.no_languages')</li>
                                 @endif
                             </ul>
                         </div>

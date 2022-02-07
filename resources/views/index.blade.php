@@ -1,17 +1,17 @@
 @extends('layouts.master')
 
-@section('titolo','Latest Offers')
+@section('titolo',trans('labels.latest_offers'))
 
 @section('stile','style.css')
 
 @section('left_navbar')
-<li class="nav-item"><a class="nav-link" href="{{ route('company.index') }}">Companies</a></li>
-<li class="nav-item"><a class="nav-link" href="{{ route('worker.index') }}">Professionals</a></li>
+<li class="nav-item"><a class="nav-link" href="{{ route('company.index') }}">@lang('labels.companies')</a></li>
+<li class="nav-item"><a class="nav-link" href="{{ route('worker.index') }}">@lang('labels.professionals')</a></li>
 @endsection
 
 
 @section('breadcrumb')
-<li class="breadcrumb-item active ms-auto"><a href="#">Offers</a></li>
+<li class="breadcrumb-item active ms-auto"><a href="#">@lang('labels.offers')</a></li>
 @endsection
 
 @section('corpo')
@@ -21,13 +21,13 @@
             <div class="row row-cols-4">
                 <div class="col"></div>
                 <div class="col text-center">
-                    <h4>Company</h4>
+                    <h4>@lang('labels.company')</h4>
                 </div>
                 <div class="col text-center">
-                    <h4>Role</h4>
+                    <h4>@lang('labels.role')</h4>
                 </div>
                 <div class="col text-center">
-                    <h4>Location</h4>
+                    <h4>@lang('labels.location')</h4>
                 </div>
             </div> 
         </div>

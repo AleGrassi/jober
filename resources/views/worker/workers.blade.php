@@ -1,24 +1,17 @@
 @extends('layouts.master')
 
-@section('titolo','Professionals')
+@section('titolo',trans('labels.professionals'))
 
 @section('stile','style.css')
 
 @section('left_navbar')
-<li class="nav-item"><a class="nav-link" href="{{ route('company.index') }}">Companies</a></li>
-<li class="nav-item active"><a class="nav-link" href="{{ route('worker.index') }}">Professionals</a></li>
-<!-- <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Professionisti<b class="caret"></b></a>
-    <ul class="dropdown-menu">
-        <li><a href="">Books List</a></li>
-        <li><a href="">Authors List</a></li>
-    </ul>
-</li> -->
+<li class="nav-item"><a class="nav-link" href="{{ route('company.index') }}">@lang('labels.companies')</a></li>
+<li class="nav-item active"><a class="nav-link" href="{{ route('worker.index') }}">@lang('labels.professionals')</a></li>
 @endsection
 
 
 @section('breadcrumb')
-<li class="breadcrumb-item active ms-auto"><a href="#">Professionals</a></li>
+<li class="breadcrumb-item active ms-auto"><a href="#">@lang('labels.professionals')</a></li>
 @endsection
 
 @section('corpo')
@@ -28,13 +21,13 @@
             <div class="row row-cols-4">
                 <div class="col"></div>
                 <div class="col text-center">
-                    <h4>Name</h4>
+                    <h4>@lang('labels.name')</h4>
                 </div>
                 <div class="col text-center">
-                    <h4>Age</h4>
+                    <h4>@lang('labels.age')</h4>
                 </div>
                 <div class="col text-center">
-                    <h4>Main profession</h4>
+                    <h4>@lang('labels.main_profession')</h4>
                 </div>
             </div> 
         </div>

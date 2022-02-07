@@ -3,18 +3,18 @@
 @section('stile','style.css')
 
 @section('left_navbar')
-<li class="nav-item"><a class="nav-link" href="{{ route('company.index') }}">Companies</a></li>
-<li class="nav-item active"><a class="nav-link" href="{{ route('worker.index') }}">Professionals</a></li>
+<li class="nav-item"><a class="nav-link" href="{{ route('company.index') }}">@lang('labels.companies')</a></li>
+<li class="nav-item active"><a class="nav-link" href="{{ route('worker.index') }}">@lang('labels.professionals')</a></li>
 @endsection
 
 
 @section('breadcrumb')
     @if(isset($worker))
-        <li class="breadcrumb-item ms-auto"><a href="{{ route('worker.index') }}">Professionals</a></li>
+        <li class="breadcrumb-item ms-auto"><a href="{{ route('worker.index') }}">@lang('labels.professionals')</a></li>
         <li class="breadcrumb-item active"><a href="{{ route('worker.show', ['worker'=> $worker->id]) }}">{{ $worker->name }} {{ $worker->surname }}</a></li>
-        <li class="breadcrumb-item active"><a href="#">Edit</a></li>
+        <li class="breadcrumb-item active"><a href="#">@lang('labels.edit')</a></li>
     @else
-        <li class="breadcrumb-item ms-auto"><a href="#">Registration</a></li>
+        <li class="breadcrumb-item ms-auto"><a href="#">@lang('labels.registration')</a></li>
     @endif
 @endsection
 
@@ -50,14 +50,14 @@
                         <div class="card-body">
                             <div class="container">
                                 <div class="row mb-2">
-                                    <label for="name" class="col-md-4 col-form-label text-md-end">Name:</label>
+                                    <label for="name" class="col-md-4 col-form-label text-md-end">@lang('labels.name'):</label>
                                     <div class="col-md-6">
                                         <input id="name" type="text" class="form-control" name="name" value="{{ Auth::user()->name }}" required autofocus>
                                     </div>
                                 </div>
 
                                 <div class="row mb-2">
-                                    <label for="surname" class="col-md-4 col-form-label text-md-end">Surname:</label>
+                                    <label for="surname" class="col-md-4 col-form-label text-md-end">@lang('labels.surname'):</label>
                                     <div class="col-md-6">
                                         @if(isset($worker))
                                             <input id="surname" type="text" class="form-control" name="surname" value="{{ $worker->surname }}" required autofocus>
@@ -68,7 +68,7 @@
                                 </div>
 
                                 <div class="row mb-2">
-                                    <label for="age" class="col-md-4 col-form-label text-md-end">age:</label>
+                                    <label for="age" class="col-md-4 col-form-label text-md-end">@lang('labels.age'):</label>
                                     <div class="col-md-6">
                                         @if(isset($worker))
                                             <input id="age" type="date" class="form-control" name="date_of_birth" value="{{ $worker->date_of_birth }}" required autofocus>
@@ -79,7 +79,7 @@
                                 </div>
 
                                 <div class="row mb-2">
-                                    <label for="nationality" class="col-md-4 col-form-label text-md-end">nationality:</label>
+                                    <label for="nationality" class="col-md-4 col-form-label text-md-end">@lang('labels.nationality'):</label>
                                     <div class="col-md-6">
                                         @if(isset($worker))
                                             <input id="nationality" type="text" class="form-control" name="nationality" value="{{ $worker->nationality }}" required autofocus>
@@ -90,7 +90,7 @@
                                 </div>
 
                                 <div class="row mb-2">
-                                    <label for="main_profession" class="col-md-4 col-form-label text-md-end">Main Profession:</label>
+                                    <label for="main_profession" class="col-md-4 col-form-label text-md-end">@lang('labels.main_profession'):</label>
                                     <div class="col-md-6">
                                         @if(isset($worker))
                                             <input id="main_profession" type="text" class="form-control" name="main_profession" value="{{ $worker->main_profession }}" required autofocus>
@@ -111,7 +111,7 @@
                     <input id="mySubmit" type="submit" class="btn btn-contact mb-2" value="Save"/>
                     @if(isset($worker))
                         <a class="btn btn-contact" href="{{ route('worker.show',['worker'=> $worker->id]) }}">
-                            Cancel
+                            @lang('labels.cancel')
                         </a>
                     @else
                         <!-- Da gestire -->

@@ -1,24 +1,17 @@
 @extends('layouts.master')
 
-@section('titolo','Companies')
+@section('titolo',trans('labels.companies'))
 
 @section('stile','style.css')
 
 @section('left_navbar')
-<li class="nav-item"><a class="nav-link" href="{{ route('company.index') }}">Companies</a></li>
-<li class="nav-item"><a class="nav-link" href="{{ route('worker.index') }}">Professionals</a></li>
-<!-- <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Professionisti<b class="caret"></b></a>
-    <ul class="dropdown-menu">
-        <li><a href="">Books List</a></li>
-        <li><a href="">Authors List</a></li>
-    </ul>
-</li> -->
+<li class="nav-item"><a class="nav-link" href="{{ route('company.index') }}">@lang('labels.companies')</a></li>
+<li class="nav-item"><a class="nav-link" href="{{ route('worker.index') }}">@lang('labels.professionals')</a></li>
 @endsection
 
 
 @section('breadcrumb')
-<li class="breadcrumb-item active ms-auto"><a href="#">Companies</a></li>
+<li class="breadcrumb-item active ms-auto"><a href="#">@lang('labels.companies')</a></li>
 @endsection
 
 @section('corpo')
