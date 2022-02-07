@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\App;
 use App\Models\DataLayer;
 
 class language
@@ -18,10 +19,12 @@ class language
      */
     public function handle(Request $request, Closure $next)
     {
+        $dl=new DataLayer();
+        $dl->console_log('sono fuori');
+        $dl->console_log(Session::get('language'));
         if(Session::has('language')){
-            $dl=new DataLayer();
-            $dl->console_log('lingua cambiata, nuova lingua: ' . Session::get('language'));
-            App::setLocale(Session::get('language'));
+            $dl->console_log('sono dentro');
+            app()->setLocale(Session::get('language'));
         }
         return $next($request);
     }

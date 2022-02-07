@@ -8,7 +8,7 @@ return [
     'offers' => 'Offers',
     'worker' => 'worker',
     'latest_offers' => 'Ultime offerte',
-    'professionals' => 'Professionals',
+    'professionals' => 'Professionisti',
     'companys_offer' => ':company\'s offer',
 
     'name' => 'Name',

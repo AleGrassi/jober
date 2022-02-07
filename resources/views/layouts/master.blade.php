@@ -30,8 +30,8 @@
                     </ul>
                     <ul class="navbar-nav navbar-right">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="i" role="button" data-bs-toggle="dropdown">
-                                <img src="{{ asset('storage/img/flags/it.png') }}" class="brand-image" width="16px" alt="">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                <img id="current_language" src="{{ asset('storage/img/flags/it.png') }}" class="brand-image" width="16px" height="16px" alt="">
                             </a>
                             <ul class="dropdown-menu flags-dropdown">
                                 <li>
