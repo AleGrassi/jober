@@ -213,6 +213,20 @@ class DataLayer{
         $language_requirement->save();
     }
 
+    public function reject_candidate($offer_id, $worker_id){
+        $offer = Offer::find($offer_id);
+        $worker = $offer->candidates->find($worker_id);
+        $worker->pivot->status = 'rejected';
+        $worker->pivot->save();
+    }
+
+    public function reconsider_candidate($offer_id, $worker_id){
+        $offer = Offer::find($offer_id);
+        $worker = $offer->candidates->find($worker_id);
+        $worker->pivot->status = 'pending';
+        $worker->pivot->save();
+    }
+
     //remove elements
     public function delete_education($id){
         Education::find($id)->delete();

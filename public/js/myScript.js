@@ -159,10 +159,13 @@ function computeAge(dateString) {
     return age;
 }
 
-function candidate(offer_id, worker_id){
+function candidate(offer_id, worker_id, uncandidate_string){
     let success_msg = new Map();
     success_msg.set('it','Candidatura effettuata con successo!');
     success_msg.set('en','Application done succesfully!');
+    uncandidate_string = new Map();
+    uncandidate_string.set('it','Annulla candidatura');
+    uncandidate_string.set('en','Remove candidation');
     let lang = $('body').attr('lang');
 
     $.ajax({
@@ -174,22 +177,19 @@ function candidate(offer_id, worker_id){
         },
         success: function(data){
             if(data.done){
-                $('#msg_error').hide();
-                
                 $('#msg_success_text').html(success_msg.get(lang));
                 $('#msg_success').show();
+                $('#candidate_btn').unbind('click');
+                $('#candidate_btn').click(function(){
+                    removeApplication(offer_id,worker_id);
+                });
+                $('#candidate_btn').html(uncandidate_string.get(lang));
             }
-            
         }
     });
 }
 
 function checkApplication(offer_id, worker_id) {
-    let error_msg = new Map();
-    error_msg.set('it',"Ti sei gia' candidato per questa posizione");
-    error_msg.set('en','You already applied for this position');
-    let lang = $('body').attr('lang');
-
     $.ajax({
         url: '/application/check',
         type: 'GET',
@@ -197,13 +197,44 @@ function checkApplication(offer_id, worker_id) {
                 worker: worker_id},
         success: function(data){    //data sono i dati che mi arrivano dalla richiesta, quelli in json
             if(data.found){ //il worker e' gia' candidato a questa offerta
-                $('#msg_error_text').html(error_msg.get(lang));
-                $('#msg_error').show();
-                $('#msg_success').hide();
+                //in questo caso il bottone che si deve vedere e' quello per rimuovere la candidatura
+                $('#candidate').hide();
+                $('#uncandidate').show();
             }else{  //il worker non e' ancora candidato a questa offerta
-                candidate(offer_id, worker_id);
+                //in questo caso il bottone che si deve vedere e' quello per candidarsi
+                $('#uncandidate').hide();
+                $('#candidate').show();
             }
         }
     });
 }
 
+function removeApplication(offer_id, worker_id, candidate_string){
+    let success_msg = new Map();
+    success_msg.set('it','La candidatura e\' stata rimossa con successo');
+    success_msg.set('en','You are no longer applied for this position');
+    candidate_string = new Map();
+    candidate_string.set('it','Candidati');
+    candidate_string.set('en','Apply');
+    let lang = $('body').attr('lang');
+
+    $.ajax({
+        url: '/application/uncandidate',
+        type: 'GET',
+        data: {
+            offer: offer_id,
+            worker: worker_id
+        },
+        success: function(data){
+            if(data.done){
+                $('#msg_success_text').html(success_msg.get(lang));
+                $('#msg_success').show();
+                $('#candidate_btn').unbind('click');
+                $('#candidate_btn').click(function(){
+                    candidate(offer_id,worker_id);
+                });
+                $('#candidate_btn').html(candidate_string.get(lang));
+            }
+        }
+    });
+}

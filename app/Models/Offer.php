@@ -17,7 +17,7 @@ class Offer extends Model
     }
 
     public function candidates(){
-        return $this->belongsToMany('App\Models\Worker');
+        return $this->belongsToMany('App\Models\Worker')->withPivot('status');
     }    
     
     public function language_requirements(){

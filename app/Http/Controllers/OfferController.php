@@ -115,11 +115,30 @@ class OfferController extends Controller
         return response()->json($response);
     }
 
+    public function uncandidate(Request $request){
+        $dl = new DataLayer();
+        $offer = $dl->find_offer_by_id($request->input('offer'));
+        $worker = $dl->find_worker_by_id($request->input('worker'));
+
+        $offer->candidates()->detach($worker);
+        $response = array('done' => true);
+
+        return response()->json($response);
+    }
+
     public function rejectCandidate($offer_id, $candidate_id){
        $dl = new DataLayer();
-       $offer = $dl->find_offer_by_id($offer_id);
+
+       $dl->reject_candidate($offer_id, $candidate_id);
        
-       $offer->candidates()->detach($candidate_id);
+       return Redirect::to(route('offer.show',['offer'=>$offer_id]));
+    }
+
+    public function reconsiderCandidate($offer_id, $candidate_id){
+       $dl = new DataLayer();
+
+       $dl->reconsider_candidate($offer_id, $candidate_id);
+       
        return Redirect::to(route('offer.show',['offer'=>$offer_id]));
     }
 

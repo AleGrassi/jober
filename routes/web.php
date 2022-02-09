@@ -58,7 +58,9 @@ Route::group(['middleware'=>['language']], function(){
         Route::get('/offer/{offer}/destroy',['as'=>'offer.destroy', 'uses'=>'\App\Http\Controllers\OfferController@destroy']);
         Route::post('/offer/{offer}/update',['as'=>'offer.update', 'uses'=>'\App\Http\Controllers\OfferController@update']);
         Route::get('/offer/{offer}/{worker}/reject',['as'=>'offer.reject', 'uses'=>'\App\Http\Controllers\OfferController@rejectCandidate']);
+        Route::get('/offer/{offer}/{worker}/reconsider',['as'=>'offer.reconsider', 'uses'=>'\App\Http\Controllers\OfferController@reconsiderCandidate']);
         Route::get('/application/candidate', '\App\Http\Controllers\OfferController@candidate');
+        Route::get('/application/uncandidate', '\App\Http\Controllers\OfferController@uncandidate');
         Route::get('/application/check', '\App\Http\Controllers\OfferController@ajaxCheckForWorker');
     });
 

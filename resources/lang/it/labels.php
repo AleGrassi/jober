@@ -10,6 +10,9 @@ return [
     'latest_offers' => 'Ultime offerte',
     'professionals' => 'Professionisti',
     'companys_offer' => 'Offerta di :company',
+    'applications' => 'Candidature',
+    'no_applications' => 'Non ti sei ancora candidato per alcuna posizione di lavoro',
+    'status' => 'Stato',
 
     'name' => 'Nome',
     'surname' => 'Cognome',
@@ -35,6 +38,8 @@ return [
     'add_offer' => 'Aggiungo offerta',
     'role' => 'Ruolo',
     'candidate' => 'Candidati',
+    'uncandidate' => 'Annulla candidatura',
+    'applied' => 'Candidato',
     'job_descriprion' => 'Mansioni principali e responsabilità',
     'education_requirements' => 'Titoli di studio richiesti',
     'education_requirement' => 'Titolo di studio richiesto',
@@ -49,6 +54,7 @@ return [
     'starting_salary' => 'Stipendio iniziale',
     'candidates' => 'Candidati',
     'reject' => 'Rifiuta',
+    'reconsider' => 'Riconsidera',
     'contact' => 'Contatta',
     'no_candidates' => 'Non sono presenti candidati al momento',
 

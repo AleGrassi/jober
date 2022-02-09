@@ -148,6 +148,93 @@
 </div>
 </div>
 
+<br>
+<div class="container top-buffer mb-4">
+    <div class="row row-cols-1 g-4">
+        <h1>@lang('labels.applications'):</h1>
+    </div>
+
+    <div class="row row-cols-1 g-4">
+        <div class="col">
+            <div class="row row-cols-4">
+                <div class="col"></div>
+                <div class="col text-center">
+                    <h4>@lang('labels.company')</h4>
+                </div>
+                <div class="col text-center">
+                    <h4>@lang('labels.role')</h4>
+                </div>
+                <div class="col text-center">
+                    <h4>@lang('labels.status')</h4>
+                </div>
+            </div> 
+        </div>
+
+        @if(count($worker->offers) > 0)
+            @foreach($worker->offers as $offer)        
+                @if($offer->pivot->status == 'pending')
+                    <div class="col">
+                        <a class="card-link" href="{{ route('offer.show',['offer'=> $offer->id]) }}">
+                            <div class="card card-responsive">
+                                <div class="row row-cols-4">
+                                    <div class="col my-auto">
+                                        <div class="logo-img-holder">
+                                            <img class="card-img-top" src="{{ asset('storage/img/company_profile/'.$offer->company->image) }}">
+                                        </div>
+                                    </div>
+                                    <div class="col text-center my-auto">
+                                        <p class="my-auto">{{ $offer->company->name }}</p>
+                                    </div>
+                                    <div class="col my-auto text-center">
+                                        <p class="my-auto">{{ $offer->title }}</p>
+                                    </div>
+                                    <div class="col my-auto text-center">
+                                        <p class="my-auto">{{ $offer->pivot->status }}</p>
+                                    </div>
+                                </div> 
+                            </div>
+                        </a>
+                    </div>
+                @endif
+            @endforeach
+            @foreach($worker->offers as $offer)        
+                @if($offer->pivot->status == 'rejected')
+                    <div class="col">
+                        <a class="card-link" href="{{ route('offer.show',['offer'=> $offer->id]) }}">
+                            <div class="card card-responsive border-danger border-2">
+                                <div class="row row-cols-4">
+                                    <div class="col my-auto">
+                                        <div class="logo-img-holder">
+                                            <img class="card-img-top" src="{{ asset('storage/img/company_profile/'.$offer->company->image) }}">
+                                        </div>
+                                    </div>
+                                    <div class="col text-center my-auto">
+                                        <p class="my-auto">{{ $offer->company->name }}</p>
+                                    </div>
+                                    <div class="col my-auto text-center">
+                                        <p class="my-auto">{{ $offer->title }}</p>
+                                    </div>
+                                    <div class="col my-auto text-center">
+                                        <p class="my-auto text-danger">{{ $offer->pivot->status }}</p>
+                                    </div>
+                                </div> 
+                            </div>
+                        </a>
+                    </div>
+                @endif
+            @endforeach
+        @else
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        @lang('labels.no_applications')
+                    </div>
+                </div>
+            </div>
+        @endif
+    </div>
+</div>
+
 <script>
 let birth_date = @json($worker->date_of_birth);
 let age = computeAge(birth_date);

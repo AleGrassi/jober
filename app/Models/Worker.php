@@ -14,7 +14,7 @@ class Worker extends Model
     protected $fillable = ['name','surname','image','sex','date_of_birth','email','main_profession','nationality','user_id'];
 
     public function offers(){
-        return $this->belongsToMany('App\Models\Offer');
+        return $this->belongsToMany('App\Models\Offer')->withPivot('status');
     }
 
     public function educations(){
@@ -35,6 +35,10 @@ class Worker extends Model
 
     public function user(){
         return $this->belongsTo('App\Models\User');
+    }
+
+    public function isApplied($offer_id){
+        return (count($this->offers->where('id',$offer_id)) > 0);
     }
 
     public static $rules = [

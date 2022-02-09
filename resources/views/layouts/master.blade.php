@@ -14,7 +14,7 @@
         <script src="{{ url('/') }}/js/myScript.js"></script>
     </head>
 
-    <body lang="{{ Session::get('language') }}">
+    <body lang="{{ App::getLocale() }}">
         <nav class="navbar navbar-expand-lg">
             <div class="container">
                 <a class="navbar-brand brand-image" href="{{ route('offer.index') }}">

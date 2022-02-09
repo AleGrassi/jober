@@ -10,6 +10,9 @@ return [
     'latest_offers' => 'Latest Offers',
     'professionals' => 'Professionals',
     'companys_offer' => ':company\'s offer',
+    'applications' => 'Applications',
+    'no_applications' => 'You haven\'t applied to any job position yet',
+    'status' => 'Status',
 
     'name' => 'Name',
     'surname' => 'Surname',
@@ -35,6 +38,8 @@ return [
     'add_offer' => 'Add offer',
     'role' => 'Role',
     'candidate' => 'Candidate',
+    'uncandidate' => 'Remove candidation',
+    'applied' => 'Applied',
     'job_descriprion' => 'Main tasks, duties and responsabilities',
     'education_requirements' => 'Education requirements',
     'education_requirement' => 'Education requirement',
@@ -48,8 +53,8 @@ return [
     'no_starting_salary' => 'The starting salary hasn\'t been specified',
     'starting_salary' => 'Starting salary',
     'candidates' => 'Candidates',
-    'candidate' => 'Candidate',
     'reject' => 'Reject',
+    'reconsider' => 'Reconsider',
     'contact' => 'Contact',
     'no_candidates' => 'There are no candidates at the moment',
 
