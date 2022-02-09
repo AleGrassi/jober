@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\DataLayer;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Company;
 
 class CompanyController extends Controller
 {
@@ -21,6 +22,7 @@ class CompanyController extends Controller
     }
 
     public function store(Request $request){
+        $this->validate($request, Company::$rules);
         $dl = new DataLayer();
 
         $user_id = auth()->id();
@@ -77,6 +79,7 @@ class CompanyController extends Controller
     } 
 
     public function update(Request $request, $id){
+        $this->validate($request, Company::$rules);
         $dl = new DataLayer();
         $company = $dl->find_company_by_id($id);
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DataLayer;
+use App\Models\Worker;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,6 +22,7 @@ class WorkerController extends Controller
     }
 
     public function store(Request $request){
+        $this->validate($request, Worker::$rules);
         $dl = new DataLayer();
 
         $user_id = auth()->id();
@@ -104,6 +106,7 @@ class WorkerController extends Controller
     } 
 
     public function update(Request $request, $id){
+        $this->validate($request, Worker::$rules);
         $dl = new DataLayer();
         $worker = $dl->find_worker_by_id($id);
         $user_email = Auth::user()->email;

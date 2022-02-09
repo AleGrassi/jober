@@ -36,4 +36,12 @@ class Worker extends Model
     public function user(){
         return $this->belongsTo('App\Models\User');
     }
+
+    public static $rules = [
+        'name' => 'required|alpha',
+        'surname' => 'required|alpha',
+        'date_of_birth' => 'date_format:Y-m-d',
+        'nationality' => 'required|alpha',
+        'main_profession' => 'alpha',
+    ];
 }

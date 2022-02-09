@@ -27,4 +27,10 @@ class Offer extends Model
     public function skill_requirements(){
         return $this->hasMany('App\Models\SkillRequirement');
     }
+
+    public static $rules = [
+        'title' => 'required|alpha',
+        'description' => 'required',
+        'location' => 'required',
+    ];
 }

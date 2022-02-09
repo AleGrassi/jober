@@ -134,7 +134,7 @@ function addLocationField(){
                         <div class="row my-auto">
                             <div class="col-12 col-sm-8 col-md-9 my-auto">
                                 <input class="form-control mb-2" type="text" id="location_name" name="location_name[]" placeholder="Location..." value="">
-                                <input class="form-control mb-2" type="text" id="location_email" name="location_email[]" placeholder="Location email..." value="">
+                                <input class="form-control mb-2" type="email" id="location_email" name="location_email[]" placeholder="Location email..." value="">
                                 <input class="form-control mb-2 mb-sm-0" type="text" id="location_phone" name="location_phone[]" placeholder="Location phone number..." value="">
                             </div> 
                             <div class="col-12 col-sm-4 col-md-3 my-auto">

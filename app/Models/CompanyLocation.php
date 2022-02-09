@@ -16,4 +16,5 @@ class CompanyLocation extends Model
     public function company(){
         return $this->belongsTo('App\Models\Company');
     }
+    
 }

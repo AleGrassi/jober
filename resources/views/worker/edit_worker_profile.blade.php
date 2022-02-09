@@ -52,7 +52,12 @@
                                 <div class="row mb-2">
                                     <label for="name" class="col-md-4 col-form-label text-md-end">@lang('labels.name'):</label>
                                     <div class="col-md-6">
-                                        <input id="name" type="text" class="form-control" name="name" value="{{ Auth::user()->name }}" required autofocus>
+                                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ Auth::user()->name }}" required autofocus>
+                                        @error('name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -60,10 +65,15 @@
                                     <label for="surname" class="col-md-4 col-form-label text-md-end">@lang('labels.surname'):</label>
                                     <div class="col-md-6">
                                         @if(isset($worker))
-                                            <input id="surname" type="text" class="form-control" name="surname" value="{{ $worker->surname }}" required autofocus>
+                                            <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{ $worker->surname }}" required autofocus>
                                         @else
-                                            <input id="surname" type="text" class="form-control" name="surname" value="" required autofocus>
+                                            <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" value="" required autofocus>
                                         @endif
+                                        @error('surname')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -71,10 +81,15 @@
                                     <label for="age" class="col-md-4 col-form-label text-md-end">@lang('labels.age'):</label>
                                     <div class="col-md-6">
                                         @if(isset($worker))
-                                            <input id="age" type="date" class="form-control" name="date_of_birth" value="{{ $worker->date_of_birth }}" required autofocus>
+                                            <input id="age" type="date" class="form-control @error('date_of_birth') is-invalid @enderror" name="date_of_birth" value="{{ $worker->date_of_birth }}" required autofocus>
                                         @else
-                                            <input id="age" type="date" class="form-control" name="date_of_birth" value="" required autofocus>
+                                            <input id="age" type="date" class="form-control @error('date_of_birth') is-invalid @enderror" name="date_of_birth" value="" required autofocus>
                                         @endif
+                                        @error('date_of_birth')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -82,10 +97,15 @@
                                     <label for="nationality" class="col-md-4 col-form-label text-md-end">@lang('labels.nationality'):</label>
                                     <div class="col-md-6">
                                         @if(isset($worker))
-                                            <input id="nationality" type="text" class="form-control" name="nationality" value="{{ $worker->nationality }}" required autofocus>
+                                            <input id="nationality" type="text" class="form-control @error('nationality') is-invalid @enderror" name="nationality" value="{{ $worker->nationality }}" required autofocus>
                                         @else
-                                            <input id="nationality" type="text" class="form-control" name="nationality" value="" required autofocus>
+                                            <input id="nationality" type="text" class="form-control @error('nationality') is-invalid @enderror" name="nationality" value="" required autofocus>
                                         @endif
+                                        @error('nationality')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -93,18 +113,21 @@
                                     <label for="main_profession" class="col-md-4 col-form-label text-md-end">@lang('labels.main_profession'):</label>
                                     <div class="col-md-6">
                                         @if(isset($worker))
-                                            <input id="main_profession" type="text" class="form-control" name="main_profession" value="{{ $worker->main_profession }}" required autofocus>
+                                            <input id="main_profession" type="text" class="form-control @error('main_profession') is-invalid @enderror" name="main_profession" value="{{ $worker->main_profession }}" required autofocus>
                                         @else
-                                            <input id="main_profession" type="text" class="form-control" name="main_profession" value="" required autofocus>
+                                            <input id="main_profession" type="text" class="form-control @error('main_profession') is-invalid @enderror" name="main_profession" value="" required autofocus>
                                         @endif
+                                        @error('main_profession')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
 
 
                 <div class="col-12 col-sm-2">
