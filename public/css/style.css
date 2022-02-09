@@ -245,4 +245,9 @@
 
 .flags-dropdown {
     min-width:inherit;
-  }
+}
+
+.popup-message {
+    display: none;
+}
+

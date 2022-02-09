@@ -43,10 +43,15 @@
                     <div class="card company-name-card text-center">
                         <div class="card-body">
                             @if(isset($offer))
-                                <input class="form-control" type="text" id="title" name="title" required placeholder="Role title" value="{{ $offer->title }}">
+                                <input class="form-control @error('title') is-invalid @enderror" type="text" id="title" name="title" required placeholder="Role title" value="{{ $offer->title }}">
                             @else
-                                <input class="form-control" type="text" id="title" name="title" required placeholder="Role title" value="">
+                                <input class="form-control @error('title') is-invalid @enderror" type="text" id="title" name="title" required placeholder="Role title" value="">
                             @endif
+                            @error('title')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
                     <div class="card">
@@ -55,10 +60,15 @@
                             </div>
                             <div class="card-body">
                                 @if(isset($offer))
-                                    <textarea class="form-control" style="resize:none;" id="location" name="location" rows="4" placeholder="Location" required>{{ $offer->location }}</textarea>
+                                    <textarea class="form-control @error('location') is-invalid @enderror" style="resize:none;" id="location" name="location" rows="4" placeholder="Location" required>{{ $offer->location }}</textarea>
                                 @else
-                                    <textarea class="form-control" style="resize:none;" id="location" name="location" rows="4" placeholder="Location" required></textarea>
+                                    <textarea class="form-control @error('location') is-invalid @enderror" style="resize:none;" id="location" name="location" rows="4" placeholder="Location" required></textarea>
                                 @endif
+                                @error('location')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                     </div>
                     
@@ -82,10 +92,15 @@
                         </div>
                         <div class="card-body">
                             @if(isset($offer))
-                                <textarea class="form-control" style="resize:none;" id="description" name="description" rows="10" placeholder="These are the main tasks, duties and responsabilities" required>{{ $offer->description }}</textarea>
+                                <textarea class="form-control @error('description') is-invalid @enderror" style="resize:none;" id="description" name="description" rows="10" placeholder="These are the main tasks, duties and responsabilities" required>{{ $offer->description }}</textarea>
                             @else
-                                <textarea class="form-control" style="resize:none;" id="description" name="description" rows="10" placeholder="These are the main tasks, duties and responsabilities" required></textarea>
+                                <textarea class="form-control @error('description') is-invalid @enderror" style="resize:none;" id="description" name="description" rows="10" placeholder="These are the main tasks, duties and responsabilities" required></textarea>
                             @endif
+                            @error('description')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
                 </div>

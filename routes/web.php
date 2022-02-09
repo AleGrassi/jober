@@ -58,7 +58,8 @@ Route::group(['middleware'=>['language']], function(){
         Route::get('/offer/{offer}/destroy',['as'=>'offer.destroy', 'uses'=>'\App\Http\Controllers\OfferController@destroy']);
         Route::post('/offer/{offer}/update',['as'=>'offer.update', 'uses'=>'\App\Http\Controllers\OfferController@update']);
         Route::get('/offer/{offer}/{worker}/reject',['as'=>'offer.reject', 'uses'=>'\App\Http\Controllers\OfferController@rejectCandidate']);
-        Route::get('/offer/{offer}/{worker}/candidate',['as'=>'offer.candidate', 'uses'=>'\App\Http\Controllers\OfferController@candidate']);
+        Route::get('/application/candidate', '\App\Http\Controllers\OfferController@candidate');
+        Route::get('/application/check', '\App\Http\Controllers\OfferController@ajaxCheckForWorker');
     });
 
     //language change

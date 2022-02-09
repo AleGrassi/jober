@@ -15,6 +15,14 @@
 
 @section('corpo')
 <div class="container">
+    <row class="g-4">
+        <div class="card card-reponsive popup-message mb-3 alert alert-danger text-center" id="msg_error">
+            <strong id="msg_error_text"></strong>
+        </div>
+        <div class="card card-reponsive popup-message mb-3 alert alert-success text-center" id="msg_success">
+            <strong id="msg_success_text"></strong>
+        </div>
+    </row>
     <div class="row g-4">
 
         <div class="col-12 col-sm-3">
@@ -53,9 +61,13 @@
                 </a>
             @elseif(!isset(Auth::user()->company))
                 @if(isset(Auth::user()->worker))
-                    <a class="btn btn-contact mb-2" href="{{ route('offer.candidate', ['offer'=>$offer->id, 'worker'=>Auth::user()->worker->id]) }}">
-                        @lang('labels.candidate')
-                    </a>
+                    
+                    <form id="candidate" method="get" action="">
+                        <button type="submit" class="btn btn-contact mb-2" onclick="event.preventDefault(); checkApplication({{ $offer->id }}, {{ Auth::user()->worker->id }});">
+                            @lang('labels.candidate')
+                        </button>
+                    </form>
+                    
                 @else
                     <a class="btn btn-contact mb-2" href="{{ route('login') }}">
                         @lang('labels.candidate')
@@ -222,6 +234,7 @@
     </div>
 
 </div>
+
 
 
 @endsection

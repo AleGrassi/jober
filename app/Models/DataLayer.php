@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\DB;
+
 class DataLayer{
 
     //list elements
@@ -65,6 +67,16 @@ class DataLayer{
 
     public function delete_company($company_id){
         Company::find($company_id)->delete();
+    }
+
+    public function exists_application($offer_id, $worker_id){
+        $offers = DB::select("SELECT offer.* FROM offer, offer_worker WHERE (worker_id = ? AND offer_id = ?)", [$worker_id,$offer_id]);
+
+        if(count($offers) == 0){
+            return false;
+        }else{
+            return true;
+        }
     }
 
     //add elements

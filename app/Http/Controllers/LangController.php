@@ -12,7 +12,6 @@ class LangController extends Controller
     public function changeLanguage(Request $request, $lang){
         Session::put('language', $lang);
         $dl = new DataLayer();
-        $dl -> console_log(Session::get('language'));
         return redirect()->back();
     }
 }

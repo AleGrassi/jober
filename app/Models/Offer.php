@@ -29,7 +29,7 @@ class Offer extends Model
     }
 
     public static $rules = [
-        'title' => 'required|alpha',
+        'title' => 'required|string',
         'description' => 'required',
         'location' => 'required',
     ];

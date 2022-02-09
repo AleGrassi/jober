@@ -104,14 +104,15 @@ class OfferController extends Controller
         return Redirect::to(route('offer.show', ['offer' => $id]));
     } 
 
-    public function candidate($offer_id, $worker_id){
+    public function candidate(Request $request){
         $dl = new DataLayer();
-        $offer = $dl->find_offer_by_id($offer_id);
-        $worker = $dl->find_worker_by_id($worker_id);
+        $offer = $dl->find_offer_by_id($request->input('offer'));
+        $worker = $dl->find_worker_by_id($request->input('worker'));
 
         $offer->candidates()->attach($worker);
+        $response = array('done' => true);
 
-        return Redirect::to(route('offer.show',['offer'=>$offer]));
+        return response()->json($response);
     }
 
     public function rejectCandidate($offer_id, $candidate_id){
@@ -125,4 +126,17 @@ class OfferController extends Controller
     public function destroy(){
 
     } 
+
+    public function ajaxCheckForWorker(Request $request){
+        //return a JSON {'found':true/false}
+
+        $dl = new DataLayer();
+
+        if($dl->exists_application($request->input('offer'), $request->input('worker'))){
+            $response = array('found' => true);
+        }else{
+            $response = array('found' => false);
+        }
+        return response()->json($response);
+    }
 }

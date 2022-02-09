@@ -20,10 +20,7 @@ class language
     public function handle(Request $request, Closure $next)
     {
         $dl=new DataLayer();
-        $dl->console_log('sono fuori');
-        $dl->console_log(Session::get('language'));
         if(Session::has('language')){
-            $dl->console_log('sono dentro');
             app()->setLocale(Session::get('language'));
         }
         return $next($request);

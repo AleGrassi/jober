@@ -159,3 +159,51 @@ function computeAge(dateString) {
     return age;
 }
 
+function candidate(offer_id, worker_id){
+    let success_msg = new Map();
+    success_msg.set('it','Candidatura effettuata con successo!');
+    success_msg.set('en','Application done succesfully!');
+    let lang = $('body').attr('lang');
+
+    $.ajax({
+        url: '/application/candidate',
+        type: 'GET',
+        data: {
+            offer: offer_id,
+            worker: worker_id
+        },
+        success: function(data){
+            if(data.done){
+                $('#msg_error').hide();
+                
+                $('#msg_success_text').html(success_msg.get(lang));
+                $('#msg_success').show();
+            }
+            
+        }
+    });
+}
+
+function checkApplication(offer_id, worker_id) {
+    let error_msg = new Map();
+    error_msg.set('it',"Ti sei gia' candidato per questa posizione");
+    error_msg.set('en','You already applied for this position');
+    let lang = $('body').attr('lang');
+
+    $.ajax({
+        url: '/application/check',
+        type: 'GET',
+        data: {offer: offer_id,
+                worker: worker_id},
+        success: function(data){    //data sono i dati che mi arrivano dalla richiesta, quelli in json
+            if(data.found){ //il worker e' gia' candidato a questa offerta
+                $('#msg_error_text').html(error_msg.get(lang));
+                $('#msg_error').show();
+                $('#msg_success').hide();
+            }else{  //il worker non e' ancora candidato a questa offerta
+                candidate(offer_id, worker_id);
+            }
+        }
+    });
+}
+
