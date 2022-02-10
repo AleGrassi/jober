@@ -18,6 +18,8 @@ class WorkerController extends Controller
     }
 
     public function create(){
+        $dl=new DataLayer();
+        $dl->console_log('sono qui');
         return view('worker.edit_worker_profile');
     }
 

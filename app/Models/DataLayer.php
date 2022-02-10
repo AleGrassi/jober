@@ -161,7 +161,7 @@ class DataLayer{
         $skill_requirement->save();
     }
 
-    public function add_language_requirement(){
+    public function add_language_requirement($name, $offer_id){
         $language_requirement = new LanguageRequirement();
         $language_requirement->name = $name;
         $language_requirement->offer_id = $offer_id;
@@ -246,6 +246,14 @@ class DataLayer{
 
     public function delete_company_location($id){
         CompanyLocation::find($id)->delete();
+    }
+
+    public function delete_skill_requirement($id){
+        SkillRequirement::find($id)->delete();
+    }
+
+    public function delete_language_requirement($id){
+        LanguageRequirement::find($id)->delete();
     }
     
     function console_log( $data ){

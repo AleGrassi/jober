@@ -27,7 +27,7 @@ Route::post('/user/register',['as'=>'user.register', 'uses'=>'\App\Http\Controll
 Route::group(['middleware'=>['language']], function(){
     //company
     Route::get('/company',['as'=>'company.index', 'uses'=>'\App\Http\Controllers\CompanyController@index']);
-    Route::get('/company/{company}',['as'=>'company.show', 'uses'=>'\App\Http\Controllers\CompanyController@show']);
+    Route::get('/company/{company}/profile',['as'=>'company.show', 'uses'=>'\App\Http\Controllers\CompanyController@show']);
     Route::group(['middleware'=>['authCustom']], function(){
         Route::get('/company/create',['as'=>'company.create', 'uses'=>'\App\Http\Controllers\CompanyController@create']);
         Route::post('/company',['as'=>'company.store', 'uses'=>'\App\Http\Controllers\CompanyController@store']);
@@ -37,8 +37,6 @@ Route::group(['middleware'=>['language']], function(){
     });
 
     //worker
-    Route::get('/worker',['as'=>'worker.index', 'uses'=>'\App\Http\Controllers\WorkerController@index']);
-    Route::get('/worker/{worker}',['as'=>'worker.show', 'uses'=>'\App\Http\Controllers\WorkerController@show']);
     Route::group(['middleware'=>['authCustom']], function(){
         Route::get('/worker/create',['as'=>'worker.create', 'uses'=>'\App\Http\Controllers\WorkerController@create']);
         Route::post('/worker',['as'=>'worker.store', 'uses'=>'\App\Http\Controllers\WorkerController@store']);
@@ -47,10 +45,12 @@ Route::group(['middleware'=>['language']], function(){
         Route::post('/worker/{worker}/update',['as'=>'worker.update', 'uses'=>'\App\Http\Controllers\WorkerController@update']);
         Route::get('/worker/{worker}/contact',['as'=>'worker.contact', 'uses'=>'\App\Http\Controllers\WorkerController@contact']);
     });
+    Route::get('/worker',['as'=>'worker.index', 'uses'=>'\App\Http\Controllers\WorkerController@index']);
+    Route::get('/worker/{worker}/profile',['as'=>'worker.show', 'uses'=>'\App\Http\Controllers\WorkerController@show']);
 
     //offer
     Route::get('/offer',['as'=>'offer.index', 'uses'=>'\App\Http\Controllers\OfferController@index']);
-    Route::get('/offer/{offer}',['as'=>'offer.show', 'uses'=>'\App\Http\Controllers\OfferController@show']);
+    Route::get('/offer/{offer}/description',['as'=>'offer.show', 'uses'=>'\App\Http\Controllers\OfferController@show']);
     Route::group(['middleware'=>['authCustom']], function(){
         Route::get('/offer/create',['as'=>'offer.create', 'uses'=>'\App\Http\Controllers\OfferController@create']);
         Route::post('/offer',['as'=>'offer.store', 'uses'=>'\App\Http\Controllers\OfferController@store']);

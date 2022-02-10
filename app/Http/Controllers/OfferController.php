@@ -28,14 +28,14 @@ class OfferController extends Controller
 
         $user_id = auth()->id();
         $company_id = Auth::user()->company->id;
-        $offer = $dl->add_offer($request->input('title'), $request->input('description'), $request->input('location'), $request->input('starting_salary'), $request->input('education_requirements'), $company_id);
+        $offer = $dl->add_offer($request->input('title'), $request->input('description'), $request->input('location'), $request->input('starting_salary'), $request->input('edu_requirements'), $company_id);
         $offer_id = $offer->id;
 
         $skill_requirements = $request->input('skill_requirement');
         if(isset($skill_requirement)){
             foreach($skill_requirements as $sr){
                 if(!empty($sr)){
-                    $dl->add_skill_requirement($sr->name, $offer_id);
+                    $dl->add_skill_requirement($sr, $offer_id);
                 }
             }
         }
@@ -44,7 +44,7 @@ class OfferController extends Controller
         if(isset($language_requirement)){
             foreach($language_requirements as $lr){
                 if(!empty($lr)){
-                    $dl->add_language_requirement($lr->name, $offer_id);
+                    $dl->add_language_requirement($lr, $offer_id);
                 }
             }
         }
@@ -76,16 +76,17 @@ class OfferController extends Controller
         $offer = $dl->find_offer_by_id($id);
         $user_id = auth()->id();
         $company_id = Auth::user()->company->id;
-        $dl->update_offer($id, $request->input('title'), $request->input('description'), $request->input('location'), $request->input('starting_salary'), $request->input('education_requirements'), $company_id);
+        $dl->update_offer($id, $request->input('title'), $request->input('description'), $request->input('location'), $request->input('starting_salary'), $request->input('edu_requirements'), $company_id);
+        $offer_id = $offer->id;
 
         foreach($offer->skill_requirements as $sr){
             $dl->delete_skill_requirement($sr->id);
         }
         $skill_requirements = $request->input('skill_requirement');
-        if(isset($skill_requirement)){
+        if(isset($skill_requirements)){
             foreach($skill_requirements as $sr){
                 if(!empty($sr)){
-                    $dl->add_skill_requirement($sr->name, $offer_id);
+                    $dl->add_skill_requirement($sr, $offer_id);
                 }
             }
         }
@@ -94,10 +95,10 @@ class OfferController extends Controller
             $dl->delete_language_requirement($lr->id);
         }
         $language_requirements = $request->input('language_requirement');
-        if(isset($language_requirement)){
+        if(isset($language_requirements)){
             foreach($language_requirements as $lr){
                 if(!empty($lr)){
-                    $dl->add_language_requirement($lr->name, $offer_id);
+                    $dl->add_language_requirement($lr, $offer_id);
                 }
             }
         }

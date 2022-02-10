@@ -167,7 +167,7 @@
 </div>
 
 @if((Auth::user() !== null))
-    @if(isset(Auth::user()->company))
+    @if(isset(Auth::user()->company) AND Auth::user()->company->id == $offer->company->id)
         <div class="container top-buffer mb-4">
             <div class="row">
                 <div class="col-12">
