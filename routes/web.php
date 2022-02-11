@@ -27,6 +27,7 @@ Route::post('/user/register',['as'=>'user.register', 'uses'=>'\App\Http\Controll
 Route::group(['middleware'=>['language']], function(){
     //company
     Route::get('/company',['as'=>'company.index', 'uses'=>'\App\Http\Controllers\CompanyController@index']);
+    Route::get('/companies/filter',['as'=>'company.filter', 'uses'=>'\App\Http\Controllers\CompanyController@filter']);
     Route::get('/company/{company}/profile',['as'=>'company.show', 'uses'=>'\App\Http\Controllers\CompanyController@show']);
     Route::group(['middleware'=>['authCustom']], function(){
         Route::get('/company/create',['as'=>'company.create', 'uses'=>'\App\Http\Controllers\CompanyController@create']);
@@ -34,23 +35,28 @@ Route::group(['middleware'=>['language']], function(){
         Route::get('/company/{company}/edit',['as'=>'company.edit', 'uses'=>'\App\Http\Controllers\CompanyController@edit']);
         Route::get('/company/{company}/destroy',['as'=>'company.destroy', 'uses'=>'\App\Http\Controllers\CompanyController@destroy']);
         Route::post('/company/{company}/update',['as'=>'company.update', 'uses'=>'\App\Http\Controllers\CompanyController@update']);
+        Route::post('/company/contact',['as'=>'company.contact', 'uses'=>'\App\Http\Controllers\CompanyController@contact']);
+        Route::get('/company/{company}/contact',['as'=>'company.contact.form', 'uses'=>'\App\Http\Controllers\CompanyController@contactForm']);
     });
 
     //worker
+    Route::get('/worker',['as'=>'worker.index', 'uses'=>'\App\Http\Controllers\WorkerController@index']);
+    Route::get('/worker/{worker}/profile',['as'=>'worker.show', 'uses'=>'\App\Http\Controllers\WorkerController@show']);
+    Route::get('/workers/filter',['as'=>'worker.filter', 'uses'=>'\App\Http\Controllers\WorkerController@filter']);
     Route::group(['middleware'=>['authCustom']], function(){
         Route::get('/worker/create',['as'=>'worker.create', 'uses'=>'\App\Http\Controllers\WorkerController@create']);
         Route::post('/worker',['as'=>'worker.store', 'uses'=>'\App\Http\Controllers\WorkerController@store']);
         Route::get('/worker/{worker}/edit',['as'=>'worker.edit', 'uses'=>'\App\Http\Controllers\WorkerController@edit']);
         Route::get('/worker/{worker}/destroy',['as'=>'worker.destroy', 'uses'=>'\App\Http\Controllers\WorkerController@destroy']);
         Route::post('/worker/{worker}/update',['as'=>'worker.update', 'uses'=>'\App\Http\Controllers\WorkerController@update']);
-        Route::get('/worker/{worker}/contact',['as'=>'worker.contact', 'uses'=>'\App\Http\Controllers\WorkerController@contact']);
+        Route::post('/worker/{worker}/send',['as'=>'worker.contact', 'uses'=>'\App\Http\Controllers\WorkerController@contact']);
+        Route::get('/worker/{worker}/contact',['as'=>'worker.contact.form', 'uses'=>'\App\Http\Controllers\WorkerController@contactForm']);
     });
-    Route::get('/worker',['as'=>'worker.index', 'uses'=>'\App\Http\Controllers\WorkerController@index']);
-    Route::get('/worker/{worker}/profile',['as'=>'worker.show', 'uses'=>'\App\Http\Controllers\WorkerController@show']);
 
     //offer
     Route::get('/offer',['as'=>'offer.index', 'uses'=>'\App\Http\Controllers\OfferController@index']);
     Route::get('/offer/{offer}/description',['as'=>'offer.show', 'uses'=>'\App\Http\Controllers\OfferController@show']);
+    Route::get('/offers/filter',['as'=>'offer.filter', 'uses'=>'\App\Http\Controllers\OfferController@filter']);
     Route::group(['middleware'=>['authCustom']], function(){
         Route::get('/offer/create',['as'=>'offer.create', 'uses'=>'\App\Http\Controllers\OfferController@create']);
         Route::post('/offer',['as'=>'offer.store', 'uses'=>'\App\Http\Controllers\OfferController@store']);

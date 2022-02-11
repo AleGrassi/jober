@@ -18,6 +18,13 @@ class OfferController extends Controller
         return view('index')->with('offers', $offers);
     }
 
+    public function filter(Request $request){
+        $dl = new DataLayer();
+        $offers = $dl->filter_offers($request->input('company_filter'), $request->input('role_filter'), $request->input('location_filter'));
+
+        return view('index')->with('offers', $offers);
+    }
+
     public function create(){
         return view('company.edit_offer');
     }
@@ -107,21 +114,15 @@ class OfferController extends Controller
 
     public function candidate(Request $request){
         $dl = new DataLayer();
-        $offer = $dl->find_offer_by_id($request->input('offer'));
-        $worker = $dl->find_worker_by_id($request->input('worker'));
+        $dl->candidate($request->input('offer'), $request->input('worker'));
 
-        $offer->candidates()->attach($worker);
         $response = array('done' => true);
-
         return response()->json($response);
     }
 
     public function uncandidate(Request $request){
         $dl = new DataLayer();
-        $offer = $dl->find_offer_by_id($request->input('offer'));
-        $worker = $dl->find_worker_by_id($request->input('worker'));
-
-        $offer->candidates()->detach($worker);
+        $dl->uncandidate($request->input('offer'), $request->input('worker'));
         $response = array('done' => true);
 
         return response()->json($response);

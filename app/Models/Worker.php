@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Worker extends Model
 {
@@ -36,9 +37,14 @@ class Worker extends Model
     public function user(){
         return $this->belongsTo('App\Models\User');
     }
-
+/*
     public function isApplied($offer_id){
         return (count($this->offers->where('id',$offer_id)) > 0);
+    }
+*/
+    public function isApplied($offer_id){
+        $result = DB::select('select * from offer_worker where (worker_id = ? and offer_id = ? and (status = ? or status = ?))',[$this->id,$offer_id,"rejected","pending"]);
+        return (count($result) > 0);
     }
 
     public static $rules = [

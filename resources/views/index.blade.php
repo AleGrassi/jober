@@ -7,6 +7,7 @@
 @section('left_navbar')
 <li class="nav-item"><a class="nav-link" href="{{ route('company.index') }}">@lang('labels.companies')</a></li>
 <li class="nav-item"><a class="nav-link" href="{{ route('worker.index') }}">@lang('labels.professionals')</a></li>
+<li class="nav-item"><a class="nav-link active" href="{{ route('offer.index') }}">@lang('labels.offers')</a></li>
 @endsection
 
 
@@ -16,22 +17,52 @@
 
 @section('corpo')
 <div class="container">
-    <div class="row row-cols-1 g-4">
+    <form method="get" action="{{ route('offer.filter') }}">
+        <div class="row row-cols-4 mb-4">
+            <div class="col">
+                <button class="btn btn-contact">@lang('labels.filter')</button>
+            </div>
+            <div class="col text-center">
+                <input id="company_filter" name="company_filter" type="text" class="form-control px-3 text-center" placeholder="{{ trans('labels.company') }}">
+            </div>
+            <div class="col text-center">
+                <input id="role_filter" name="role_filter" type="text" class="form-control text-center" placeholder="{{ trans('labels.role') }}">
+            </div>
+            <div class="col text-center">
+                <input id="location_filter" name="location_filter" type="text" class="form-control text-center" placeholder="{{ trans('labels.location') }}">
+            </div>
+        </div> 
+    </form>
+    <div class="row row-cols-1 g-4 mb-3">
         <div class="col">
-            <div class="row row-cols-4">
-                <div class="col"></div>
-                <div class="col text-center">
+            <div class="row">
+                <div class="col-1 col-lg-2 text-end">
+                    <label class="text-end col-form-label" for="elem_num">@lang('labels.view')</label>
+                </div>
+                <div class="col-2 col-lg-1 text-end">
+                    <select class="form-select text-center" name="elem_num" onchange="if (this.value) paginate(document.getElementById('offers'),this.value,5);">
+                        <option value="4">4</option>
+                        <option value="10" selected>10</option> 
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+                <div class="col-3 text-center">
                     <h4>@lang('labels.company')</h4>
                 </div>
-                <div class="col text-center">
+                <div class="col-3 text-center">
                     <h4>@lang('labels.role')</h4>
                 </div>
-                <div class="col text-center">
+                <div class="col-3 text-center">
                     <h4>@lang('labels.location')</h4>
                 </div>
             </div> 
         </div>
+    </div>
 
+    <div id="offers" class="row row-cols-1 g-4">
         @foreach($offers as $offer)
         <div class="col">
             <a class="card-link" href="{{ route('offer.show', ['offer' => $offer->id]) }}">
@@ -56,8 +87,10 @@
             </a>
         </div>
         @endforeach
-
-        
     </div>
+    <nav id="pagination-nav" class="d-flex justify-content-center align-items-center mt-5"></nav>
 </div>
+<script>
+    paginate(document.getElementById('offers'), 10,5);
+</script>
 @endsection

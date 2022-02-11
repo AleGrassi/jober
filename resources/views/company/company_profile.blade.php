@@ -3,7 +3,8 @@
 
 @section('left_navbar')
 <li class="nav-item"><a class="nav-link" href="{{ route('company.index') }}">@lang('labels.companies')</a></li>
-<li class="nav-item active"><a class="nav-link" href="{{ route('worker.index') }}">@lang('labels.professionals')</a></li>
+<li class="nav-item"><a class="nav-link" href="{{ route('worker.index') }}">@lang('labels.professionals')</a></li>
+<li class="nav-item"><a class="nav-link" href="{{ route('offer.index') }}">@lang('labels.offers')</a></li>
 @endsection
 
 
@@ -38,7 +39,7 @@
 
         <div class="col-12 col-sm-2">
             @if(!isset(Auth::user()->company) OR Auth::user()->company->id !== $company->id)
-                <a class="btn btn-contact mb-2"><!-- to do -->
+                <a class="btn btn-contact mb-2" href="{{ route('company.contact.form',['company'=>$company->id]) }}">
                     @lang('labels.contact')
                 </a>
             @else

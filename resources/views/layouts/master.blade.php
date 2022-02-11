@@ -25,7 +25,7 @@
                 </button>
                 
                 <div class="collapse navbar-collapse" id="myNavbar">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <ul class="navbar-nav nav-tabs me-auto mb-2 mb-lg-0">
                         @yield('left_navbar')
                     </ul>
                     <ul class="navbar-nav navbar-right">

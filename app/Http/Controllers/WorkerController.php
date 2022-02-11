@@ -7,12 +7,20 @@ use App\Models\DataLayer;
 use App\Models\Worker;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
+use GuzzleHttp\Client;
 
 class WorkerController extends Controller
 {
     public function index(){
         $dl = new DataLayer();
         $workers = $dl->list_workers();
+
+        return view('worker.workers')->with('workers', $workers);
+    }
+
+    public function filter(Request $request){
+        $dl = new DataLayer();
+        $workers = $dl->filter_workers($request->input('name'), $request->input('profession'));
 
         return view('worker.workers')->with('workers', $workers);
     }
@@ -187,7 +195,53 @@ class WorkerController extends Controller
         
     } 
 
-    public function contact($id){
+    public function contactForm($worker_id){
+        $dl = new DataLayer();
+        $worker = $dl->find_worker_by_id($worker_id);
+        return view('contact_form')->with('worker',$worker);
+    }
+
+    public function contact(Request $request, $worker){
+        $dl = new DataLayer();
+        $receiver = $dl->find_worker_by_id($worker);
+
+        if(isset(Auth::user()->worker)){
+            $sender = Auth::user()->worker;
+            $sender_email = $sender->email;
+            $sender_name = $sender->name;
+        }elseif(isset(Auth::user()->company)){
+            $sender = Auth::user()->company;
+            $sender_email = $sender->email;
+            $sender_name = $sender->name;
+        }
+
+        $receiver_email = $receiver->email;
+        $receiver_name = $receiver->name;
+        $subject = $request->input('subject');
+        $message = $request->input('message');
+
+        try{
+            $client = new Client([
+                // URI da contattare
+                'base_uri' => 'http://localhost:8086',
+                'timeout'  => 60.0,
+            ]);
+            
+            $response = $client->request('POST', '', [
+                 'form_params' => ['sender_email' => $sender_email, 'sender_name' => $sender_name, 'receiver_email' => $receiver_email, 'receiver_name' => $receiver_name, 'subject' => $subject, 'message' => $message],
+                 'headers' => ['source' => 'Jober', 'content-type' => 'application/x-www-form-urlencoded', 'Accept' => 'application/json']
+            ]);
+
+            $result = json_decode($response->getBody());
+            if ($result->result == "positive") {
+                return view('worker.worker_profile')->with('worker', $receiver)->with('message','Message sent correctly');
+            }else{
+                return view('worker.worker_profile')->with('worker', $receiver)->with('message','Message sent correctly');
+            }
+        }catch(\GuzzleHttp\Exception\ConnectException $e){
+            return Redirect::to(route('worker.show', ['worker' => $receiver->id, 'error'=>'Something went wrong']));
+        }
+
 
     }
 

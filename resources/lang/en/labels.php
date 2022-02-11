@@ -13,11 +13,14 @@ return [
     'applications' => 'Applications',
     'no_applications' => 'You haven\'t applied to any job position yet',
     'status' => 'Status',
+    'subject' => 'Subject',
+    'message' => 'Message',
+    'send' => 'Send',
 
     'name' => 'Name',
     'surname' => 'Surname',
     'age' => 'Age',
-    'main_profession' => 'Main profession',
+    'main_profession' => 'Profession',
     'location' => 'Location',
     'locations' => 'Locations',
     'nationality' => 'Nationality',
@@ -65,6 +68,8 @@ return [
     'save' => 'Save',
     'edit' => 'Edit',
     'registration' => 'Registration',
+    'filter' => 'Filter',
+    'view' => 'View',
 
 
 

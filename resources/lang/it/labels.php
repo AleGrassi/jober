@@ -13,6 +13,9 @@ return [
     'applications' => 'Candidature',
     'no_applications' => 'Non ti sei ancora candidato per alcuna posizione di lavoro',
     'status' => 'Stato',
+    'subject' => 'Oggetto',
+    'message' => 'Messaggio',
+    'send' => 'Invia',
 
     'name' => 'Nome',
     'surname' => 'Cognome',
@@ -65,6 +68,8 @@ return [
     'save' => 'Salva',
     'edit' => 'Modifica',
     'registration' => 'Registrazione',
+    'filter' => 'Fitra',
+    'view' => 'Vedi',
 
 
 

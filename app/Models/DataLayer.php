@@ -31,6 +31,33 @@ class DataLayer{
         return Offer::find($offer_id)->candidates()->get();
     }
 
+    //filter elements
+    public function filter_companies($name){
+        $n = trim($name);
+        return Company::where('name','LIKE','%'.$n.'%')->orderBy('name','asc')->get();
+    }
+
+    public function filter_offers($company, $role, $location){
+        $c = trim($company);
+        $r = trim($role);
+        $l = trim($location);
+        $result = DB::table('offer')
+            ->join('company','company_id','=','company.id')
+            ->where('company.name','LIKE','%'.$c.'%')
+            ->where('offer.title','LIKE','%'.$r.'%')
+            ->where('offer.location','LIKE','%'.$l.'%')
+            ->select('offer.*')->get();
+        $this->console_log($result);
+        return Offer::hydrate($result->toArray());
+    }
+
+    public function filter_workers($name, $profession){
+        $n = strtolower(trim($name));
+        $p = trim($profession);
+        $result = DB::select('select * from worker where (name like ? or surname like ?) and main_profession like ?',["%{$n}%","%{$n}%","%{$p}%"]);
+        return Worker::hydrate($result);
+    }
+
     //find elements
     public function find_worker_by_id($id){
         return Worker::find($id);
@@ -211,6 +238,35 @@ class DataLayer{
         $language_requirement->name = $name;
         $language_requirement->offer_id = $offer_id;
         $language_requirement->save();
+    }
+
+    public function candidate($offer_id, $worker_id){
+        $offer = Offer::find($offer_id);
+        $worker = $offer->candidates->find($worker_id);
+        if(isset($worker)){
+            if($worker->pivot->status == 'removed_pending'){
+                $worker->pivot->status = 'pending';
+            }elseif($worker->pivot->status == 'removed_rejected'){
+                $worker->pivot->status = 'rejected';
+            }
+            $worker->pivot->save();
+        }else{
+            $worker = Worker::find($worker_id);
+            $offer->candidates()->attach($worker);
+        }
+    }
+
+    public function uncandidate($offer_id, $worker_id){
+        $offer = Offer::find($offer_id);
+        $worker = $offer->candidates->find($worker_id);
+        if(isset($worker)){
+            if($worker->pivot->status == 'rejected'){
+                $worker->pivot->status = 'removed_rejected';
+            }elseif($worker->pivot->status == 'pending'){
+                $worker->pivot->status = 'removed_pending';
+            }
+            $worker->pivot->save();
+        }
     }
 
     public function reject_candidate($offer_id, $worker_id){

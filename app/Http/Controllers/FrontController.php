@@ -21,4 +21,8 @@ class FrontController extends Controller
             return view('index')->with('logged',false);
         } */
     }
+
+    public function contact(Request $request){
+
+    }
 }

@@ -17,6 +17,13 @@ class CompanyController extends Controller
         return view('company.companies')->with('companies', $companies);
     }
 
+    public function filter(Request $request){
+        $dl = new DataLayer();
+        $companies = $dl->filter_companies($request->input('name'));
+
+        return view('company.companies')->with('companies', $companies);
+    }
+
     public function create(){
         return view('company.edit_company_profile');
     }
@@ -123,6 +130,12 @@ class CompanyController extends Controller
         }
         return Redirect::to(route('company.show', ['company' => $id]));
     } 
+
+    public function contactForm($company_id){
+        $dl = new DataLayer();
+        $company = $dl->find_company_by_id($company_id);
+        return view('contact_form')->with('company',$company);
+    }
 
     public function destroy(){
 

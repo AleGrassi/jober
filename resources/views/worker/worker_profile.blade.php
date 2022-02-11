@@ -4,7 +4,8 @@
 
 @section('left_navbar')
 <li class="nav-item"><a class="nav-link" href="{{ route('company.index') }}">@lang('labels.companies')</a></li>
-<li class="nav-item active"><a class="nav-link" href="{{ route('worker.index') }}">@lang('labels.professionals')</a></li>
+<li class="nav-item"><a class="nav-link" href="{{ route('worker.index') }}">@lang('labels.professionals')</a></li>
+<li class="nav-item"><a class="nav-link" href="{{ route('offer.index') }}">@lang('labels.offers')</a></li>
 @endsection
 
 
@@ -17,6 +18,21 @@
 
 @section('corpo')
 <div class="container">
+    <div class="row g-3">
+        @if(isset($message))
+        <div class="col">
+            <div class="card card-reponsive mb-3 alert alert-success text-center" id="msg_success">
+                <strong id="msg_success_text">{{ $message }}</strong>
+            </div>
+        </div>
+        @elseif(isset($error))
+        <div class="col">
+            <div class="card card-reponsive mb-3 alert alert-danger text-center" id="msg_error">
+                <strong id="msg_error_text">{{ $error }}</strong>
+            </div>
+        </div>
+        @endif
+    </div>
     <div class="row g-4">
 
         <div class="col-12 col-sm-3">
@@ -52,7 +68,7 @@
 
         <div class="col-12 col-sm-2">
             @if(!isset(Auth::user()->worker) OR Auth::user()->worker->id !== $worker->id)
-                <a class="btn btn-contact mb-2" href="{{ route('worker.contact', ['worker'=>$worker->id]) }}">
+                <a class="btn btn-contact mb-2" href="{{ route('worker.contact.form', ['worker'=>$worker->id]) }}">
                     @lang('labels.contact')
                 </a>
             @else
