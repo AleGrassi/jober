@@ -70,6 +70,10 @@ return [
     'registration' => 'Registration',
     'filter' => 'Filter',
     'view' => 'View',
+    'confirm_offer_deletion' => 'You are about to delete this offer. Are you sure?',
+    'attention' => 'Attention!',
+
+
 
 
 

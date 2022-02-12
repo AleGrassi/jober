@@ -144,8 +144,12 @@ class OfferController extends Controller
        return Redirect::to(route('offer.show',['offer'=>$offer_id]));
     }
 
-    public function destroy(){
-
+    public function destroy($offer){
+        $dl = new DataLayer();
+        $company = $dl->find_company_by_offer_id($offer);
+        $dl->delete_offer($offer);
+        
+        return Redirect::to(route('company.show',['company'=>$company->id]));
     } 
 
     public function ajaxCheckForWorker(Request $request){

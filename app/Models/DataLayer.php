@@ -67,6 +67,10 @@ class DataLayer{
         return Company::find($id);
     }
 
+    public function find_company_by_offer_id($offer){
+        return Offer::find($offer)->company;
+    }
+
     public function find_offer_by_id($id){
         return Offer::find($id);
     }

@@ -70,6 +70,8 @@ return [
     'registration' => 'Registrazione',
     'filter' => 'Fitra',
     'view' => 'Vedi',
+    'confirm_offer_deletion' => 'Stai per cancellare questa offerta. Continuare?',
+    'attention' => 'Attenzione!',
 
 
 

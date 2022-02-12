@@ -47,6 +47,10 @@ class Worker extends Model
         return (count($result) > 0);
     }
 
+    public function active_offers(){
+        return DB::select('select * from offer_worker where (worker_id = ? and (status = ? or status = ?))',[$this->id, "rejected", "pending"]);
+    }
+
     public static $rules = [
         'name' => 'required|alpha',
         'surname' => 'required|alpha',

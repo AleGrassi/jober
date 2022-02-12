@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('stile','style.css')
+@section('titolo','Jober | login')
 
 @section('content')
 <div class="container">

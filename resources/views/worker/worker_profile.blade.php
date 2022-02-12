@@ -1,5 +1,6 @@
 @extends('layouts.master')
 @section('stile','style.css')
+@section('titolo','Jober | '.$worker->name.' '.$worker->surname)
 
 
 @section('left_navbar')
@@ -189,7 +190,7 @@
                     </div> 
                 </div>
 
-                @if(count($worker->offers) > 0)
+                @if(count($worker->active_offers()) > 0)
                     @foreach($worker->offers as $offer)        
                         @if($offer->pivot->status == 'pending')
                             <div class="col">

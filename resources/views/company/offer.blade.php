@@ -1,6 +1,7 @@
 
 @extends('layouts.master')
 @section('stile','style.css')
+@section('titolo','Jober | '.$offer->title)
 
 @section('left_navbar')
 <li class="nav-item"><a class="nav-link" href="{{ route('company.index') }}">@lang('labels.companies')</a></li>
@@ -57,8 +58,11 @@
 
         <div class="col-12 col-sm-2">
             @if(isset(Auth::user()->company) AND Auth::user()->company->id == $offer->company->id)
-                <a class="btn btn-contact" href="{{ route('offer.edit', ['offer'=> $offer->id]) }}">
+                <a class="btn btn-contact mb-2" href="{{ route('offer.edit', ['offer'=> $offer->id]) }}">
                     @lang('labels.edit')
+                </a>
+                <a id="delete_offer" class="btn btn-cancel" href="{{ route('offer.destroy', ['offer'=> $offer->id]) }}" onclick="event.preventDefault(); confirm_offer_deletion();">
+                    @lang('labels.delete')
                 </a>
             @elseif(!isset(Auth::user()->company))
                 @if(isset(Auth::user()->worker))

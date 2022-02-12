@@ -35,7 +35,7 @@ Route::group(['middleware'=>['language']], function(){
         Route::get('/company/{company}/edit',['as'=>'company.edit', 'uses'=>'\App\Http\Controllers\CompanyController@edit']);
         Route::get('/company/{company}/destroy',['as'=>'company.destroy', 'uses'=>'\App\Http\Controllers\CompanyController@destroy']);
         Route::post('/company/{company}/update',['as'=>'company.update', 'uses'=>'\App\Http\Controllers\CompanyController@update']);
-        Route::post('/company/contact',['as'=>'company.contact', 'uses'=>'\App\Http\Controllers\CompanyController@contact']);
+        Route::post('/company/{company}/send',['as'=>'company.contact', 'uses'=>'\App\Http\Controllers\CompanyController@contact']);
         Route::get('/company/{company}/contact',['as'=>'company.contact.form', 'uses'=>'\App\Http\Controllers\CompanyController@contactForm']);
     });
 

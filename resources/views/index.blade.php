@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
-@section('titolo',trans('labels.latest_offers'))
+@section('titolo','Jober | '.trans('labels.latest_offers'))
+@section('intestazione',trans('labels.latest_offers'))
 
 @section('stile','style.css')
 

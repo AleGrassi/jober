@@ -208,7 +208,7 @@ class WorkerController extends Controller
         if(isset(Auth::user()->worker)){
             $sender = Auth::user()->worker;
             $sender_email = $sender->email;
-            $sender_name = $sender->name;
+            $sender_name = $sender->name.' '.$sender->surname;
         }elseif(isset(Auth::user()->company)){
             $sender = Auth::user()->company;
             $sender_email = $sender->email;
@@ -216,7 +216,7 @@ class WorkerController extends Controller
         }
 
         $receiver_email = $receiver->email;
-        $receiver_name = $receiver->name;
+        $receiver_name = $receiver->name.' '.$receiver->surname;
         $subject = $request->input('subject');
         $message = $request->input('message');
 
@@ -236,10 +236,10 @@ class WorkerController extends Controller
             if ($result->result == "positive") {
                 return view('worker.worker_profile')->with('worker', $receiver)->with('message','Message sent correctly');
             }else{
-                return view('worker.worker_profile')->with('worker', $receiver)->with('message','Message sent correctly');
+                return view('worker.worker_profile')->with('worker', $receiver)->with('error','Message not sent. Something went wrong');
             }
         }catch(\GuzzleHttp\Exception\ConnectException $e){
-            return Redirect::to(route('worker.show', ['worker' => $receiver->id, 'error'=>'Something went wrong']));
+            return view('worker.worker_profile')->with('worker', $receiver)->with('error','Message not sent.  Something went wrong');
         }
 
 

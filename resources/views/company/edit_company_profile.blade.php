@@ -1,5 +1,10 @@
 @extends('layouts.master')
 @section('stile','style.css')
+@if(isset($company))
+    @section('titolo','Jober | '.$company->name.' | edit')
+@else
+    @section('titolo','Jober | new Company')
+@endif
 
 @section('left_navbar')
 <li class="nav-item"><a class="nav-link" href="{{ route('company.index') }}">Companies</a></li>

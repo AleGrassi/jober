@@ -1,6 +1,11 @@
 
 @extends('layouts.master')
 @section('stile','style.css')
+@if(isset($worker))
+    @section('titolo','Jober | '.$worker->name.' | edit')
+@else
+    @section('titolo','Jober | new Professional')
+@endif
 
 @section('left_navbar')
 <li class="nav-item"><a class="nav-link" href="{{ route('company.index') }}">@lang('labels.companies')</a></li>

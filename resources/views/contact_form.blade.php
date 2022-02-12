@@ -2,8 +2,10 @@
 @section('stile','style.css')
 @if(isset($worker))
     @section('titolo',trans('labels.contact').' '.$worker->name.' '.$worker->surname)
+    @section('intestazione',trans('labels.contact').' '.$worker->name.' '.$worker->surname)
 @elseif(isset($company))
     @section('titolo',trans('labels.contact').' '.$company->name)
+    @section('intestazione',trans('labels.contact').' '.$company->name)
 @endif
 @section('left_navbar')
 <li class="nav-item"><a class="nav-link" href="{{ route('company.index') }}">@lang('labels.companies')</a></li>

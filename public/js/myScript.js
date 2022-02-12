@@ -339,3 +339,22 @@ const tag = (tagname, props = {}, children = []) => {
     }); 
     return element;
 };
+
+function confirm_offer_deletion(){
+    $.confirm({
+        title: 'Attention!',
+        content: 'You are deleting this offer. Are you sure?',
+        buttons: {
+            somethingElse: {
+                text: 'Confirm',
+                btnClass: 'btn-red',
+                action: function(){
+                    window.location.href = document.getElementById('delete_offer').href;
+                }
+            },
+            cancel: function () {},
+            
+        },
+        
+    });
+}
