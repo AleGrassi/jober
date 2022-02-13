@@ -24,13 +24,25 @@
                 <button class="btn btn-contact">@lang('labels.filter')</button>
             </div>
             <div class="col text-center">
-                <input id="company_filter" name="company_filter" type="text" class="form-control px-3 text-center" placeholder="{{ trans('labels.company') }}">
+                @if(isset($company_filter))
+                    <input id="company_filter" name="company_filter" type="text" class="form-control px-3 text-center" value="{{ $company_filter }}">
+                @else
+                    <input id="company_filter" name="company_filter" type="text" class="form-control px-3 text-center" placeholder="{{ trans('labels.company') }}">
+                @endif
             </div>
             <div class="col text-center">
-                <input id="role_filter" name="role_filter" type="text" class="form-control text-center" placeholder="{{ trans('labels.role') }}">
+                @if(isset($company_filter))
+                    <input id="role_filter" name="role_filter" type="text" class="form-control text-center" placeholder="{{ $role_filter }}">
+                @else
+                    <input id="role_filter" name="role_filter" type="text" class="form-control text-center" placeholder="{{ trans('labels.role') }}">
+                @endif
             </div>
             <div class="col text-center">
-                <input id="location_filter" name="location_filter" type="text" class="form-control text-center" placeholder="{{ trans('labels.location') }}">
+                @if(isset($company_filter))
+                    <input id="location_filter" name="location_filter" type="text" class="form-control text-center" placeholder="{{ $location_filter }}">
+                @else
+                    <input id="location_filter" name="location_filter" type="text" class="form-control text-center" placeholder="{{ trans('labels.location') }}">
+                @endif
             </div>
         </div> 
     </form>
@@ -64,30 +76,40 @@
     </div>
 
     <div id="offers" class="row row-cols-1 g-4">
-        @foreach($offers as $offer)
-        <div class="col">
-            <a class="card-link" href="{{ route('offer.show', ['offer' => $offer->id]) }}">
-                <div class="card card-responsive">
-                    <div class="row row-cols-4">
-                        <div class="col my-auto">
-                            <div class="logo-img-holder">
-                                <img class="card-img-top" src="{{ asset('storage/img/company_profile/'.$offer->company->image) }}">
+        @if(count($offers) > 0)
+            @foreach($offers as $offer)
+            <div class="col">
+                <a class="card-link" href="{{ route('offer.show', ['offer' => $offer->id]) }}">
+                    <div class="card card-responsive">
+                        <div class="row row-cols-4">
+                            <div class="col my-auto">
+                                <div class="logo-img-holder">
+                                    <img class="card-img-top" src="{{ asset('storage/img/company_profile/'.$offer->company->image) }}">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col text-center my-auto">
-                            <p class="my-auto">{{ $offer->company->name }}</p>
-                        </div>
-                        <div class="col my-auto text-center">
-                            <p class="my-auto">{{ $offer->title }}</p>
-                        </div>
-                        <div class="col my-auto text-center">
-                            <p class="my-auto">{{ $offer->location }}</p>
-                        </div>
-                    </div> 
+                            <div class="col text-center my-auto">
+                                <p class="my-auto">{{ $offer->company->name }}</p>
+                            </div>
+                            <div class="col my-auto text-center">
+                                <p class="my-auto">{{ $offer->title }}</p>
+                            </div>
+                            <div class="col my-auto text-center">
+                                <p class="my-auto">{{ $offer->location }}</p>
+                            </div>
+                        </div> 
+                    </div>
+                </a>
+            </div>
+            @endforeach
+        @else
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        @lang('labels.no_offers_with_filter')
+                    </div>
                 </div>
-            </a>
-        </div>
-        @endforeach
+            </div>
+        @endif
     </div>
     <nav id="pagination-nav" class="d-flex justify-content-center align-items-center mt-5"></nav>
 </div>

@@ -20,9 +20,12 @@ class OfferController extends Controller
 
     public function filter(Request $request){
         $dl = new DataLayer();
-        $offers = $dl->filter_offers($request->input('company_filter'), $request->input('role_filter'), $request->input('location_filter'));
+        $company_filter = $request->input('company_filter');
+        $role_filter = $request->input('role_filter');
+        $location_filter = $request->input('location_filter');
+        $offers = $dl->filter_offers($company_filter, $role_filter, $location_filter);
 
-        return view('index')->with('offers', $offers);
+        return view('index')->with('offers', $offers)->with('company_filter', $company_filter)->with('role_filter', $role_filter)->with('location_filter', $location_filter);
     }
 
     public function create(){

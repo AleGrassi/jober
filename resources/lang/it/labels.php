@@ -75,6 +75,9 @@ return [
 
 
 
+    'no_companies_with_filter' => 'Non ci sono aziende che soddisfano il tuo filtro',
+    'no_workers_with_filter' => 'Non ci sono professionisti che soddisfano il tuo filtro',
+    'no_offers_with_filter' => 'Non ci sono offerte che soddisfano il tuo filtro',
 
 
 

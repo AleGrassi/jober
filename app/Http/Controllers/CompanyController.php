@@ -20,9 +20,10 @@ class CompanyController extends Controller
 
     public function filter(Request $request){
         $dl = new DataLayer();
-        $companies = $dl->filter_companies($request->input('name'));
+        $name_filter = $request->input('name');
+        $companies = $dl->filter_companies($name_filter);
 
-        return view('company.companies')->with('companies', $companies);
+        return view('company.companies')->with('companies', $companies)->with('name_filter', $name_filter);
     }
 
     public function create(){

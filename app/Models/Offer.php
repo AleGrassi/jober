@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Offer extends Model
 {
@@ -26,6 +27,10 @@ class Offer extends Model
 
     public function skill_requirements(){
         return $this->hasMany('App\Models\SkillRequirement');
+    }
+
+    public function active_candidates(){
+        return DB::select('select * from worker join offer_worker where (offer_id=? and (status=? or status=?))',[$this->id, 'pending', 'rejected']);
     }
 
     public static $rules = [

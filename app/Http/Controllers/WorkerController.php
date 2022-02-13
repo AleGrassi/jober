@@ -20,9 +20,11 @@ class WorkerController extends Controller
 
     public function filter(Request $request){
         $dl = new DataLayer();
-        $workers = $dl->filter_workers($request->input('name'), $request->input('profession'));
+        $name_filter = $request->input('name');
+        $profession_filter = $request->input('profession');
+        $workers = $dl->filter_workers($name_filter, $profession_filter);
 
-        return view('worker.workers')->with('workers', $workers);
+        return view('worker.workers')->with('workers', $workers)->with('name_filter', $name_filter)->with('profession_filter', $profession_filter);
     }
 
     public function create(){

@@ -21,7 +21,11 @@
     <form method="get" action="{{ route('company.filter') }}">
         <div class="row g-2 mb-4 d-flex">
             <div class="col-12 col-sm-8 col-md-3">
-                <input type="text" class="form-control" id="name" name="name" placeholder="{{ trans('labels.name') }}">
+                @if(isset($name_filter))
+                    <input type="text" class="form-control" id="name" name="name" placeholder="{{ $name_filter }}">
+                @else
+                    <input type="text" class="form-control" id="name" name="name" placeholder="{{ trans('labels.name') }}">
+                @endif
             </div>
             <div class="col-12 col-sm-4 col-md-2">
                 <button class="btn btn-contact" type="submit">@lang('labels.filter')</button>
@@ -43,22 +47,32 @@
         </div>
     </form>
     <div id="companies" class="row g-4">
-        @foreach($companies as $company)
-            <div class="col-6 col-sm-4 col-md-3">
-                <a class="card-link" href="{{ route('company.show', ['company' => $company->id]) }}">
-                    <div class="col">
-                        <div class="card card-responsive">
-                            <div class="card-body">
-                                <div class="image-holder">
-                                    <img class="card-img-top" src="{{ asset('storage/img/company_profile/'.$company->image) }}">
+        @if(count($companies) > 0)
+            @foreach($companies as $company)
+                <div class="col-6 col-sm-4 col-md-3">
+                    <a class="card-link" href="{{ route('company.show', ['company' => $company->id]) }}">
+                        <div class="col">
+                            <div class="card card-responsive">
+                                <div class="card-body">
+                                    <div class="image-holder">
+                                        <img class="card-img-top" src="{{ asset('storage/img/company_profile/'.$company->image) }}">
+                                    </div>
+                                    <h5 class="card-title text-center">{{ $company->name }}</h5>
                                 </div>
-                                <h5 class="card-title text-center">{{ $company->name }}</h5>
                             </div>
                         </div>
+                    </a>
+                </div>
+            @endforeach
+        @else
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        @lang('labels.no_companies_with_filter')
                     </div>
-                </a>
+                </div>
             </div>
-        @endforeach
+        @endif
     </div>
     <nav id="pagination-nav" class="d-flex justify-content-center align-items-center mt-5"></nav>
 </div>

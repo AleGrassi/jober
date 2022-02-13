@@ -162,8 +162,6 @@
                 </div>
             </div>
         </div>
-
-
 </div>
 </div>
 @if(Auth::user() !== null) 

@@ -16,7 +16,8 @@ class DataLayer{
     }
 
     public function list_offers(){
-        return Offer::all();
+        $offers = DB::table('offer')->orderBy('created_at','desc')->get();
+        return Offer::hydrate($offers->toArray());
     }
     
     public function list_company_offers($company_id){
@@ -46,6 +47,7 @@ class DataLayer{
             ->where('company.name','LIKE','%'.$c.'%')
             ->where('offer.title','LIKE','%'.$r.'%')
             ->where('offer.location','LIKE','%'.$l.'%')
+            ->orderBy('offer.created_at','desc')
             ->select('offer.*')->get();
         $this->console_log($result);
         return Offer::hydrate($result->toArray());

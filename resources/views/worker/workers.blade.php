@@ -24,10 +24,18 @@
                 <button class="btn btn-contact">@lang('labels.filter')</button>
             </div>
             <div class="col text-center">
-                <input id="name" name="name" type="text" class="form-control px-3 text-center" placeholder="{{ trans('labels.name') }}">
+                @if(isset($name_filter))
+                    <input id="name" name="name" type="text" class="form-control px-3 text-center" value="{{ $name_filter }}">
+                @else
+                    <input id="name" name="name" type="text" class="form-control px-3 text-center" placeholder="{{ trans('labels.name') }}">
+                @endif
             </div>
             <div class="col text-center">
-                <input id="profession" name="profession" type="text" class="form-control text-center" placeholder="{{ trans('labels.main_profession') }}">
+                @if(isset($profession_filter))
+                    <input id="profession" name="profession" type="text" class="form-control text-center" placeholder="{{ $profession_filter }}">
+                @else
+                    <input id="profession" name="profession" type="text" class="form-control text-center" placeholder="{{ trans('labels.main_profession') }}">
+                @endif
             </div>
             <div class="col text-center">
             </div>
@@ -62,30 +70,40 @@
         </div>
     </div>
     <div id="workers" class="row row-cols-1 g-4">
-        @foreach($workers as $worker)
-        <div class="col">
-            <a class="card-link" href="{{ route('worker.show', ['worker' => $worker->id]) }}">
-                <div class="card card-responsive">
-                    <div class="row row-cols-4">
-                        <div class="col my-auto">
-                            <div class="profile-img-holder">
-                                <img class="card-img-top" src="{{ asset('storage/img/worker_profile/'.$worker->image) }}">
+        @if(count($workers) > 0)
+            @foreach($workers as $worker)
+            <div class="col">
+                <a class="card-link" href="{{ route('worker.show', ['worker' => $worker->id]) }}">
+                    <div class="card card-responsive">
+                        <div class="row row-cols-4">
+                            <div class="col my-auto">
+                                <div class="profile-img-holder">
+                                    <img class="card-img-top" src="{{ asset('storage/img/worker_profile/'.$worker->image) }}">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col text-center my-auto">
-                            <p class="my-auto">{{ $worker->name }} {{ $worker->surname }}</p>
-                        </div>
-                        <div class="col my-auto text-center">
-                            <p class="my-auto">{{ $worker->main_profession }}</p>
-                        </div>
-                        <div class="col my-auto text-center">
-                            <p class="age my-auto">{{ $worker->date_of_birth }}</p>
-                        </div>
-                    </div> 
+                            <div class="col text-center my-auto">
+                                <p class="my-auto">{{ $worker->name }} {{ $worker->surname }}</p>
+                            </div>
+                            <div class="col my-auto text-center">
+                                <p class="my-auto">{{ $worker->main_profession }}</p>
+                            </div>
+                            <div class="col my-auto text-center">
+                                <p class="age my-auto">{{ $worker->date_of_birth }}</p>
+                            </div>
+                        </div> 
+                    </div>
+                </a>
+            </div>
+            @endforeach
+        @else
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        @lang('labels.no_workers_with_filter')
+                    </div>
                 </div>
-            </a>
-        </div>
-        @endforeach
+            </div>
+        @endif
     </div>
     <nav id="pagination-nav" class="d-flex justify-content-center align-items-center mt-5"></nav>
 </div>

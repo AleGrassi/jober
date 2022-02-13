@@ -74,6 +74,9 @@ return [
     'attention' => 'Attention!',
 
 
+    'no_companies_with_filter' => 'There are no companies matching your filter',
+    'no_workers_with_filter' => 'There are no professionals matching your filter',
+    'no_offers_with_filter' => 'There are no offers matching your filter',
 
 
 

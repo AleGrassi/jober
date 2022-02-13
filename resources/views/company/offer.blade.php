@@ -194,7 +194,7 @@
                 </div>
 
 
-                @if(count($offer->candidates) > 0)
+                @if(count($offer->active_candidates()) > 0)
                     @foreach($offer->candidates as $candidate)
                         @if($candidate->pivot->status == 'pending')
                             <div class="col-12 my-auto mb-2">
