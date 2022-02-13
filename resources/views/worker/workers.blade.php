@@ -32,7 +32,7 @@
             </div>
             <div class="col text-center">
                 @if(isset($profession_filter))
-                    <input id="profession" name="profession" type="text" class="form-control text-center" placeholder="{{ $profession_filter }}">
+                    <input id="profession" name="profession" type="text" class="form-control text-center" value="{{ $profession_filter }}">
                 @else
                     <input id="profession" name="profession" type="text" class="form-control text-center" placeholder="{{ trans('labels.main_profession') }}">
                 @endif

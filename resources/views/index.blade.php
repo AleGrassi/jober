@@ -31,15 +31,15 @@
                 @endif
             </div>
             <div class="col text-center">
-                @if(isset($company_filter))
-                    <input id="role_filter" name="role_filter" type="text" class="form-control text-center" placeholder="{{ $role_filter }}">
+                @if(isset($role_filter))
+                    <input id="role_filter" name="role_filter" type="text" class="form-control text-center" value="{{ $role_filter }}">
                 @else
                     <input id="role_filter" name="role_filter" type="text" class="form-control text-center" placeholder="{{ trans('labels.role') }}">
                 @endif
             </div>
             <div class="col text-center">
-                @if(isset($company_filter))
-                    <input id="location_filter" name="location_filter" type="text" class="form-control text-center" placeholder="{{ $location_filter }}">
+                @if(isset($location_filter))
+                    <input id="location_filter" name="location_filter" type="text" class="form-control text-center" value="{{ $location_filter }}">
                 @else
                     <input id="location_filter" name="location_filter" type="text" class="form-control text-center" placeholder="{{ trans('labels.location') }}">
                 @endif

@@ -54,7 +54,7 @@ class WorkerController extends Controller
             // Upload Image
             $path = $request->file('profile_image')->storeAs('public/img/worker_profile/',$fileNameToStore);
         }else{
-            $fileNameToStore = 'worker_profile_tmp.jpeg';
+            $fileNameToStore = 'worker_profile_tmp.png';
             $dl->console_log("non ho un'immagine");
         }
 

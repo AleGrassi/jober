@@ -22,7 +22,7 @@
         <div class="row g-2 mb-4 d-flex">
             <div class="col-12 col-sm-8 col-md-3">
                 @if(isset($name_filter))
-                    <input type="text" class="form-control" id="name" name="name" placeholder="{{ $name_filter }}">
+                    <input type="text" class="form-control" id="name" name="name" value="{{ $name_filter }}">
                 @else
                     <input type="text" class="form-control" id="name" name="name" placeholder="{{ trans('labels.name') }}">
                 @endif
