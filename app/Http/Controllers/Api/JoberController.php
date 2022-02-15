@@ -16,7 +16,7 @@ class JoberController extends Controller
      */
     public function index()
     {
-        return new OfferResource(Offer::all());
+        //return new OfferResource(Offer::all());
     }
 
     /**

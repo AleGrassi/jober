@@ -47,12 +47,23 @@ class LoginController extends Controller
         $user = $dl->find_user_by_id($user_id);
         $user_type = $user->user_type;
 
+        
         if($user_type == 'worker'){
-            $worker = $dl->find_worker_by_user_id($user_id);
-            return $this->redirectTo = route('worker.show', ['worker' => $worker[0]->id]);
+            if(isset($user->worker)){
+                $worker = $dl->find_worker_by_user_id($user_id);
+                return $this->redirectTo = route('worker.show', ['worker' => $worker[0]->id]);
+            }else{
+                return $this->redirectTo = route('worker.create');
+            }
+            
         }else{
-            $company = $dl->find_company_by_user_id($user_id);
-            return $this->redirectTo = route('company.show', ['company' => $company[0]->id]);
+            if(isset($user->company)){
+                $company = $dl->find_company_by_user_id($user_id);
+                return $this->redirectTo = route('company.show', ['company' => $company[0]->id]);
+            }else{
+                return $this->redirectTo = route('company.create');
+            }
+            
         }
     }
 }

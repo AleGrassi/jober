@@ -19,7 +19,7 @@
     <body lang="{{ App::getLocale() }}">
         <nav class="navbar navbar-expand-lg">
             <div class="container">
-                <a class="navbar-brand brand-image" href="{{ route('offer.index') }}">
+                <a class="navbar-brand brand-image" href="#">
                     <img src="{{ asset('storage/img/jober.jpg') }}" class="brand-image" width="160px" alt="">
                 </a>
                 <button type="button" class="navbar-toggler navbar-light" data-bs-toggle="collapse" data-bs-target="#myNavbar" aria-expanded="false" aria-label="Toggle navigation">

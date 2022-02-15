@@ -7,9 +7,11 @@
 @endif
 
 @section('left_navbar')
-<li class="nav-item"><a class="nav-link" href="{{ route('company.index') }}">Companies</a></li>
-<li class="nav-item"><a class="nav-link" href="{{ route('worker.index') }}">Professionals</a></li>
-<li class="nav-item"><a class="nav-link" href="{{ route('offer.index') }}">@lang('labels.offers')</a></li>
+    @if(isset($company))
+        <li class="nav-item"><a class="nav-link" href="{{ route('company.index') }}">Companies</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('worker.index') }}">Professionals</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('offer.index') }}">@lang('labels.offers')</a></li>
+    @endif
 @endsection
 
 
@@ -65,10 +67,10 @@
                 </div>
 
                 <div class="col-12 col-sm-2">
-                    <input id="mySubmit" type="submit" class="btn btn-contact mb-2" value="Save"/>
+                    <input id="mySubmit" type="submit" class="btn btn-contact mb-2" value="{{ trans('labels.save') }}"/>
                     @if(isset($company))
                         <a class="btn btn-contact" href="{{ route('company.show',['company'=> $company->id]) }}">
-                            Cancel
+                            @lang('labels.cancel')
                         </a>
                     @else
                         <!-- da gestire -->
@@ -82,7 +84,7 @@
                 <div class="container">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">Locations</h5>
+                            <h5 class="card-title">@lang('labels.locations')</h5>
                         </div>
                         <ul class="list-group list-group-flush">
                             <div id="location_fields">

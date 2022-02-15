@@ -78,6 +78,7 @@ class CompanyController extends Controller
 
         return view('company.company_profile')->with('company',$company);
     } 
+
     
     public function edit($id){
         if($id == Auth::user()->company->id){
